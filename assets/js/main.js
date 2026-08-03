@@ -77,18 +77,33 @@
      ============================================================ */
   const toggle = document.querySelector(".nav-toggle");
   const links = document.querySelector(".nav-links");
+  const isOpen = () => links && links.classList.contains("open");
+
+  function setMenu(open) {
+    if (!toggle || !links) return;
+    links.classList.toggle("open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    document.body.classList.toggle("menu-locked", open);
+  }
+
   if (toggle && links) {
-    toggle.addEventListener("click", () => {
-      const open = links.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setMenu(!isOpen());
     });
     links.addEventListener("click", (e) => {
-      if (e.target.closest("a")) {
-        links.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      }
+      if (e.target.closest("a")) setMenu(false);
     });
+    document.addEventListener("click", (e) => {
+      if (isOpen() && !e.target.closest(".nav-pill")) setMenu(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setMenu(false);
+    });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 860) setMenu(false);
+    }, { passive: true });
   }
 
   /* ============================================================
