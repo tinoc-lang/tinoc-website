@@ -1114,6 +1114,7 @@ body.menu-locked { overflow: hidden; }
     gap: 10px;
     padding: 8px 12px 8px 14px;
   }
+  .nav-cta { margin-left: auto; }
   .nav-links {
     position: fixed;
     top: calc(var(--nav-h) + 8px);
