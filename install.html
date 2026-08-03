@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Install Tinoc — Status &amp; Roadmap</title>
+<meta name="description" content="Tinoc is under active development — nothing to install yet. See the status, the transpile pipeline, and how to follow the release.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d2b26'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' font-weight='700' text-anchor='middle' fill='%235eead4'%3ET%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,300..700;1,7..72,300..700&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Source+Code+Pro:ital,wght@0,400..700;1,400..600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav-pill" aria-label="Primary">
+    <a class="nav-brand" href="index.html" aria-label="Tinoc home">
+      <img src="logo-hero-crop.png" alt="Tinoc" class="nav-logo">
+    </a>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="docs.html">Docs</a></li>
+      <li><a class="nav-link active" href="install.html" aria-current="page">Install</a></li>
+      <li><a class="nav-link" href="community.html">Community</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="https://github.com/tinoc-lang" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary btn-sm" href="install.html">Get Tinoc</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow center">Install</span>
+      <h1>Get Tinoc</h1>
+      <p>The compiler is under active development. Nothing to install yet — but here is exactly what is coming, what it will need, and how to be first in line.</p>
+    </div>
+  </section>
+
+  <section class="section section-tight" style="padding-top:0">
+    <div class="container">
+      <div class="callout reveal">
+        <strong>Status: early development.</strong> The <code class="inline">tinoc</code> compiler is being built in the open on GitHub. There are no binaries to download yet — everything below is the plan, tracked as the project progresses. Follow the repo to know the moment that changes.
+      </div>
+
+      <!-- Pipeline -->
+      <div class="split" style="margin-top:56px">
+        <div class="reveal">
+          <span class="eyebrow">How it works</span>
+          <h2 style="font-size:clamp(1.7rem,3.2vw,2.3rem)">One source, universal C99.</h2>
+          <p class="muted">
+            Tinoc doesn't ship its own runtime or code generator that locks you in. It
+            transpiles <code class="inline">.tnc</code> sources to portable C99, then hands off to
+            whatever C compiler your platform already uses.
+          </p>
+          <ul class="note-list">
+            <li>Maximum system support — wherever C99 compiles, Tinoc runs.</li>
+            <li>A single small <code class="inline">tinoc.h</code> runtime header, nothing more.</li>
+            <li>Your output is readable C — auditable, debuggable, and yours.</li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <div class="code-block">
+            <div class="code-block-head"><span>pipeline</span></div>
+            <pre><code class="lang-text">main.tnc
+   │  tinoc build main.tnc
+   ▼
+main.c          ← emitted C99
+   │  cc main.c -o app
+   ▼
+app             ← native binary</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prerequisites -->
+      <div class="section-head" style="margin-top:80px">
+        <span class="eyebrow">Prerequisites</span>
+        <h2>What your system will need</h2>
+        <p class="lead">Nothing exotic — the same tools C developers already have.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <h3>A C99 compiler</h3>
+          <p>GCC, Clang, or MSVC. Tinoc emits standards-compliant C99, so the compiler is the only system dependency.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 6 4-4 4 4"/><path d="M12 2v13"/><path d="M20 16v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4"/></svg></div>
+          <h3>The <code class="inline">tinoc</code> CLI</h3>
+          <p>One binary that parses, checks, and emits C99. Prebuilt binaries arrive with the first stable release.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><box x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></div>
+          <h3><code class="inline">tinoc.h</code></h3>
+          <p>A tiny runtime header shipped with the compiler — <code class="inline">str</code>, slices, and optionals in plain C structs.</p>
+        </div>
+      </div>
+
+      <!-- Install paths -->
+      <div class="section-head" style="margin-top:80px">
+        <span class="eyebrow">Install paths</span>
+        <h2>Three ways, once it ships</h2>
+        <p class="lead">Each path is planned; availability will be announced on the repo as releases stabilize.</p>
+      </div>
+      <div class="channel-grid">
+        <div class="channel-card reveal">
+          <div class="channel-name">Prebuilt binaries <span class="badge">planned</span></div>
+          <p>Download a <code class="inline">tinoc</code> binary for your platform straight from GitHub Releases. No dependencies, drop it on your PATH.</p>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/tinoc-lang/tinoc/releases" target="_blank" rel="noopener">Watch releases</a>
+        </div>
+        <div class="channel-card reveal">
+          <div class="channel-name">Build from source <span class="badge">planned</span></div>
+          <p>Clone the repo, build with your C toolchain, and install. The exact commands will live in the repository's build guide.</p>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/tinoc-lang/tinoc" target="_blank" rel="noopener">Clone the repo</a>
+        </div>
+        <div class="channel-card reveal">
+          <div class="channel-name">Package managers <span class="badge">later</span></div>
+          <p>Homebrew, Scoop, and friends — expected once the toolchain has a stable 0.x release worth distributing.</p>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/tinoc-lang/tinoc/issues" target="_blank" rel="noopener">Follow the tracker</a>
+        </div>
+      </div>
+
+      <!-- Quick start -->
+      <div class="split" style="margin-top:80px">
+        <div class="reveal">
+          <span class="eyebrow">Quick start</span>
+          <h2 style="font-size:clamp(1.7rem,3.2vw,2.3rem)">What it will feel like.</h2>
+          <p class="muted">
+            Once the CLI lands, a hello world is three short commands — write, transpile, run.
+            The C output is yours to inspect, tweak, and commit.
+          </p>
+        </div>
+        <div class="reveal">
+          <div class="code-block">
+            <div class="code-block-head"><span>terminal</span></div>
+            <pre><code class="lang-text">$ tinoc build main.tnc
+  ✓ emitted main.c
+
+$ cc main.c -o hello
+
+$ ./hello
+Hi, Tinoc!</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Follow -->
+      <div class="cta-band reveal" style="margin-top:80px">
+        <span class="eyebrow center">Don't miss the release</span>
+        <h2>Be first in line.</h2>
+        <p>Star the repo, watch for releases, and hang out in the Discord — the community hears about milestones first.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary btn-lg" href="https://github.com/tinoc-lang/tinoc" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.1 11.1 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.67.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            Star on GitHub
+          </a>
+          <a class="btn btn-ghost btn-lg" href="https://discord.gg/pzRamyjPUQ" target="_blank" rel="noopener">Join the Discord</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo-hero-crop.png" alt="Tinoc" class="nav-logo">
+        <p>A modern systems programming language that transpiles to C99. Meaningful, Accurate, Robust, Maximum Performance, Simple.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Language</h4>
+        <ul>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="docs.html#types">Type reference</a></li>
+          <li><a href="docs.html#operators">Operators</a></li>
+          <li><a href="docs.html#modules">Modules</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <ul>
+          <li><a href="install.html">Install</a></li>
+          <li><a href="https://github.com/tinoc-lang/tinoc" target="_blank" rel="noopener">Source code</a></li>
+          <li><a href="https://github.com/tinoc-lang/tinoc/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/pbarot2009" target="_blank" rel="noopener">Creator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="community.html">Community hub</a></li>
+          <li><a href="https://discord.gg/pzRamyjPUQ" target="_blank" rel="noopener">Discord</a></li>
+          <li><a href="https://github.com/tinoc-lang" target="_blank" rel="noopener">GitHub org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> The Tinoc contributors · Apache-2.0</span>
+      <span>Tinoc — This Is Not C. Made with <span class="heart">♥</span> and C99.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

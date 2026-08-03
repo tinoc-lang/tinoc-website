@@ -1,0 +1,939 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tinoc — Language Reference</title>
+<meta name="description" content="The Tinoc language reference: variables, constants, literals, operators, functions, types, structs, enums, unions, control flow, modules, and the preprocessor.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d2b26'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' font-weight='700' text-anchor='middle' fill='%235eead4'%3ET%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,300..700;1,7..72,300..700&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Source+Code+Pro:ital,wght@0,400..700;1,400..600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav-pill" aria-label="Primary">
+    <a class="nav-brand" href="index.html" aria-label="Tinoc home">
+      <img src="logo-hero-crop.png" alt="Tinoc" class="nav-logo">
+    </a>
+    <ul class="nav-links">
+      <li><a class="nav-link active" href="docs.html" aria-current="page">Docs</a></li>
+      <li><a class="nav-link" href="install.html">Install</a></li>
+      <li><a class="nav-link" href="community.html">Community</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="https://github.com/tinoc-lang" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary btn-sm" href="install.html">Get Tinoc</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow center">Language reference</span>
+      <h1>Tinoc docs</h1>
+      <p>The syntax, semantics, and standard library of Tinoc — written in the open, right alongside the compiler. Click a section to jump in.</p>
+    </div>
+  </section>
+
+  <div class="container docs-shell">
+    <!-- ============ SIDEBAR ============ -->
+    <aside>
+      <button class="docs-toggle" id="docs-toggle" aria-expanded="false">Contents</button>
+      <div class="docs-sidebar" id="docs-sidebar">
+        <input type="search" class="docs-search" id="docs-search" placeholder="Filter sections…" aria-label="Filter docs sections">
+        <nav aria-label="Docs sections">
+          <div class="docs-nav-group">
+            <h4>Basics</h4>
+            <ul class="docs-nav">
+              <li><a href="#intro">Getting started</a></li>
+              <li><a href="#variables">Variables</a></li>
+              <li><a href="#constants">Constants</a></li>
+            </ul>
+          </div>
+          <div class="docs-nav-group">
+            <h4>Literals</h4>
+            <ul class="docs-nav">
+              <li><a href="#integers">Integers</a></li>
+              <li><a href="#floats">Floats</a></li>
+              <li><a href="#operators">Operators</a></li>
+            </ul>
+          </div>
+          <div class="docs-nav-group">
+            <h4>Functions &amp; types</h4>
+            <ul class="docs-nav">
+              <li><a href="#functions">Functions</a></li>
+              <li><a href="#types">Types</a></li>
+            </ul>
+          </div>
+          <div class="docs-nav-group">
+            <h4>Compounds</h4>
+            <ul class="docs-nav">
+              <li><a href="#structs">Structs</a></li>
+              <li><a href="#enums">Enums</a></li>
+              <li><a href="#unions">Unions</a></li>
+              <li><a href="#arrays">Arrays</a></li>
+            </ul>
+          </div>
+          <div class="docs-nav-group">
+            <h4>Control flow</h4>
+            <ul class="docs-nav">
+              <li><a href="#switch">Switch</a></li>
+              <li><a href="#if-else">If / Else</a></li>
+              <li><a href="#for">For</a></li>
+              <li><a href="#while">While</a></li>
+            </ul>
+          </div>
+          <div class="docs-nav-group">
+            <h4>Modules</h4>
+            <ul class="docs-nav">
+              <li><a href="#modules">Modules</a></li>
+              <li><a href="#preprocessor">Preprocessor</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- ============ CONTENT ============ -->
+    <div class="docs-content">
+
+      <article id="intro">
+        <h2>Getting started</h2>
+        <p class="lead">Tinoc is a modern systems programming language that <strong>transpiles to C99</strong>. Write <code class="inline">.tnc</code> source, emit portable C, compile it with any C99 toolchain, and run everywhere C runs.</p>
+        <p>There is nothing to install yet — the compiler is under active development. These docs describe the language as it is being built; they track the repository, feature by feature.</p>
+
+        <h3>Hello, world</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.tnc</span></div>
+          <pre><code class="lang-tnc">#import std.io;
+
+// Main function
+fn main() void {
+    var name str = "Prathmesh";
+    const lang = "Tinoc";
+
+    io.println("{s} is creator of {s} Programming Language!", name, lang);
+}</code></pre>
+        </div>
+
+        <h3>What the compiler emits</h3>
+        <p>Transpiling <code class="inline">main.tnc</code> produces readable C99 with a small runtime header — <code class="inline">str</code> becomes a plain struct, and <code class="inline">io.println</code> becomes <code class="inline">printf</code>.</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.c — emitted</span></div>
+          <pre><code class="lang-c">#include &lt;stdio.h&gt;
+#include &lt;tinoc.h&gt;
+
+int main() {
+    str name = {"Prathmesh", 9};
+    const str lang = {"Tinoc", 5};
+
+    printf("%s is creator of %s Programming Language!\n", name.data, lang.data);
+}</code></pre>
+        </div>
+        <p>The pipeline is <code class="inline">tinoc build main.tnc</code> → <code class="inline">main.c</code> → your C compiler. No runtime, no VM, no garbage collector — just C99.</p>
+      </article>
+
+      <article id="variables">
+        <h2>Variables</h2>
+        <p>A <strong>variable</strong> can be mutated.</p>
+        <h3>Syntax</h3>
+        <div class="syntax-box">var &lt;identifier&gt; &lt;type&gt;;                                  // Decl only, with explicit type.
+var &lt;identifier&gt; &lt;type&gt; = &lt;expression&gt;;               // Decl + init, explicit type.
+var &lt;identifier&gt; = &lt;expression&gt;;                        // Decl + init, inferred.</div>
+        <h3>Example</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.tnc</span></div>
+          <pre><code class="lang-tnc">fn main() void {
+    var name str = "Lucifer";
+    name = "Julius";
+
+    var number = 101;        // inferred as i32
+    number += 10;
+
+    var isAdmin = false;     // inferred as bool
+    isAdmin = true;
+}</code></pre>
+        </div>
+      </article>
+
+      <article id="constants">
+        <h2>Constants</h2>
+        <p>A <strong>constant</strong> cannot be mutated.</p>
+        <h3>Syntax</h3>
+        <div class="syntax-box">const &lt;identifier&gt; &lt;type&gt;;                                  // Decl only, with explicit type.
+const &lt;identifier&gt; &lt;type&gt; = &lt;expression&gt;;               // Decl + init, explicit type.
+const &lt;identifier&gt; = &lt;expression&gt;;                        // Decl + init, inferred.</div>
+        <h3>Example</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.tnc</span></div>
+          <pre><code class="lang-tnc">fn main() void {
+    const lang str = "Tinoc";
+    const codename = "C^";
+
+    // lang = "Tinoc Is Not C"
+    // Won't work — compile error.
+}</code></pre>
+        </div>
+      </article>
+
+      <article id="integers">
+        <h2>Integers</h2>
+        <h3>Integer literals</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>literals.tnc</span></div>
+          <pre><code class="lang-tnc">const decimal_int = 98222;
+const hex_int = 0xff;
+const another_hex_int = 0xFF;
+const octal_int = 0o755;
+const binary_int = 0b11110000;
+
+// underscores may sit between two digits as a visual separator
+const one_billion = 1_000_000_000;
+const binary_mask = 0b1_1111_1111;
+const permissions = 0o7_5_5;
+const big_address = 0xFF80_0000_0000_0000;</code></pre>
+        </div>
+        <p>The compiler infers the width of each integer literal — defaulting to <code class="inline">i32</code>, and widening to <code class="inline">i64</code>…<code class="inline">i128</code> when the literal needs more room.</p>
+        <div class="callout">
+          <strong>For values not known at compile time</strong>, add the type explicitly:
+          <div class="code-block" style="margin:14px 0 0">
+            <div class="code-block-head"><span>divide.tnc</span></div>
+            <pre><code class="lang-tnc">fn divide(a i32, b i32) i32 {
+    return a / b;
+}</code></pre>
+          </div>
+        </div>
+      </article>
+
+      <article id="floats">
+        <h2>Floats</h2>
+        <h3>Float literals</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>literals.tnc</span></div>
+          <pre><code class="lang-tnc">const floating_point = 123.0E+77;
+const another_float = 123.0;
+const yet_another = 123.0e+77;
+const hex_floating_point = 0x103.70p-5;
+const another_hex_float = 0x103.70;
+const yet_another_hex_float = 0x103.70P-5;
+
+// underscores may sit between two digits as a visual separator
+const lightspeed = 299_792_458.000_000;
+const nanosecond = 0.000_000_001;
+const more_hex = 0x1234_5678.9ABC_CDEFp-10;</code></pre>
+        </div>
+        <p>Tinoc has no special syntax for <em>NaN</em>, <em>Infinity (∞)</em>, or <em>Negative Infinity (−∞)</em> — use <code class="inline">std.math</code>.</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>math.tnc</span></div>
+          <pre><code class="lang-tnc">#import std.math;
+
+const inf = math.inf();
+const negative_inf = - math.inf();
+const nan = math.nan();</code></pre>
+        </div>
+      </article>
+
+      <article id="operators">
+        <h2>Operators</h2>
+        <p>Tinoc's operators, their syntax, and what they do:</p>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr><th>Name</th><th>Syntax</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Addition</td><td><code>a + b</code> · <code>a += b</code></td><td>Integers &amp; floats; can overflow</td></tr>
+              <tr><td>Wrapping Addition</td><td><code>a +% b</code> · <code>a +%= b</code></td><td>Wraps on overflow</td></tr>
+              <tr><td>Saturating Addition</td><td><code>a +| b</code> · <code>a +|= b</code></td><td>Clamps on overflow</td></tr>
+              <tr><td>Subtraction</td><td><code>a - b</code> · <code>a -= b</code></td><td>Integers &amp; floats</td></tr>
+              <tr><td>Wrapping Subtraction</td><td><code>a -% b</code> · <code>a -%= b</code></td><td>Wraps on underflow</td></tr>
+              <tr><td>Saturating Subtraction</td><td><code>a -| b</code> · <code>a -|= b</code></td><td>Clamps on underflow</td></tr>
+              <tr><td>Negation</td><td><code>-a</code></td><td>Two's-complement negation</td></tr>
+              <tr><td>Wrapping Negation</td><td><code>-%a</code></td><td>Wraps on overflow</td></tr>
+              <tr><td>Multiplication</td><td><code>a * b</code> · <code>a *= b</code></td><td>Integers &amp; floats</td></tr>
+              <tr><td>Wrapping Multiplication</td><td><code>a *% b</code> · <code>a *%= b</code></td><td>Wraps on overflow</td></tr>
+              <tr><td>Saturating Multiplication</td><td><code>a *| b</code> · <code>a *|= b</code></td><td>Clamps on overflow</td></tr>
+              <tr><td>Division</td><td><code>a / b</code> · <code>a /= b</code></td><td>Integers &amp; floats</td></tr>
+              <tr><td>Remainder Division</td><td><code>a % b</code> · <code>a %= b</code></td><td>Modulo</td></tr>
+              <tr><td>Bit Shift Left</td><td><code>a &lt;&lt; b</code> · <code>a &lt;&lt;= b</code></td><td>Shift left</td></tr>
+              <tr><td>Saturating Bit Shift Left</td><td><code>a &lt;&lt;| b</code> · <code>a &lt;&lt;|= b</code></td><td>Clamps shifted-out bits</td></tr>
+              <tr><td>Bit Shift Right</td><td><code>a &gt;&gt; b</code> · <code>a &gt;&gt;= b</code></td><td>Shift right</td></tr>
+              <tr><td>Bitwise And</td><td><code>a &amp; b</code> · <code>a &amp;= b</code></td><td>Bitwise AND</td></tr>
+              <tr><td>Bitwise Or</td><td><code>a | b</code> · <code>a |= b</code></td><td>Bitwise OR</td></tr>
+              <tr><td>Bitwise Xor</td><td><code>a ^ b</code> · <code>a ^= b</code></td><td>Bitwise XOR</td></tr>
+              <tr><td>Bitwise Not</td><td><code>~a</code></td><td>Bitwise complement</td></tr>
+              <tr><td>Defaulting Optional Unwrap</td><td><code>a orelse b</code></td><td>Use <code>b</code> when <code>a</code> is null</td></tr>
+              <tr><td>Optional Unwrap</td><td><code>a?</code></td><td>Unwrap, else compile error</td></tr>
+              <tr><td>Defaulting Error Unwrap</td><td><code>a catch b</code> · <code>a catch |err| b</code></td><td>Handle errors with a default</td></tr>
+              <tr><td>Logical And</td><td><code>a and b</code></td><td>Short-circuit AND</td></tr>
+              <tr><td>Logical Or</td><td><code>a or b</code></td><td>Short-circuit OR</td></tr>
+              <tr><td>Logical Not</td><td><code>!a</code></td><td>Negate a boolean</td></tr>
+              <tr><td>Equality</td><td><code>a == b</code></td><td>Equal</td></tr>
+              <tr><td>Null Check</td><td><code>a == null</code></td><td>Optional is empty</td></tr>
+              <tr><td>Inequality</td><td><code>a != b</code></td><td>Not equal</td></tr>
+              <tr><td>Non-Null Check</td><td><code>a != null</code></td><td>Optional has a value</td></tr>
+              <tr><td>Greater Than</td><td><code>a &gt; b</code></td><td>Ordering</td></tr>
+              <tr><td>Greater or Equal</td><td><code>a &gt;= b</code></td><td>Ordering</td></tr>
+              <tr><td>Less Than</td><td><code>a &lt; b</code></td><td>Ordering</td></tr>
+              <tr><td>Lesser or Equal</td><td><code>a &lt;= b</code></td><td>Ordering</td></tr>
+              <tr><td>Pointer Dereference</td><td><code>a^</code></td><td>Read through a pointer</td></tr>
+              <tr><td>Address Of</td><td><code>&amp;a</code></td><td>Take a pointer</td></tr>
+              <tr><td>Error Set Merge</td><td><code>a || b</code></td><td>Merge error sets</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Precedence</h3>
+        <p>From highest to lowest binding:</p>
+        <div class="syntax-box">x() x[] x.y x^ x? a!b x{} !x -x -%x ~x &amp;x ?x * / % ** *% *| || + - ++ +% -% +| -|
+&lt;&lt; &gt;&gt; &lt;&lt;| &amp; ^ | orelse catch == != &lt; &gt; &lt;= &gt;= and or = *= *%= *|= /= %= +=
++%= +|= -= -%= -|= &lt;&lt;= &lt;&lt;|= &gt;&gt;= &amp;= ^= |=</div>
+      </article>
+
+      <article id="functions">
+        <h2>Functions</h2>
+        <p>A <strong>function</strong> is a reusable block of code. Tinoc supports plain, generic, and multi-generic functions.</p>
+        <h3>Syntax</h3>
+        <div class="syntax-box">fn &lt;identifier&gt;() &lt;type&gt; {…}
+fn &lt;identifier&gt;(&lt;param&gt; &lt;type&gt;, …) &lt;type&gt; {…}
+fn &lt;identifier&gt;:T() &lt;type&gt; {…}
+fn &lt;identifier&gt;:T(&lt;param&gt; &lt;type&gt;, …) &lt;type&gt; {…}
+fn &lt;identifier&gt;:(T, …)() &lt;type&gt; {…}
+fn &lt;identifier&gt;:(T, …)(&lt;param&gt; &lt;type&gt;, …) &lt;type&gt; {…}</div>
+        <h3>Calling</h3>
+        <div class="syntax-box">&lt;identifier&gt;();
+&lt;identifier&gt;(value, …);
+&lt;identifier&gt;:T();
+// and the same for the other forms…</div>
+        <h3>Example</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.tnc</span></div>
+          <pre><code class="lang-tnc">#import std.io;
+
+fn add(a i8, b i8) i8 {
+    return a + b;
+}
+
+fn greet() void {
+    io.println("Hi");
+}
+
+fn Identity:T(val T) T {
+    return val;
+}
+
+fn main() void {
+    const result = add(10, 25);
+    greet();
+    io.println("result = {d}", result);
+    io.println("{any}", Identity:str("Tinoc"));
+}</code></pre>
+        </div>
+      </article>
+
+      <article id="types">
+        <h2>Types</h2>
+        <p class="lead">Tinoc has a rich type system covering primitives, compounds, pointer/optional/error types, and heap-allocated collections.</p>
+
+        <h3>Integer types</h3>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
+            <tbody>
+              <tr><td><code>u8</code></td><td><code>uint8_t</code></td><td>Unsigned integer</td></tr>
+              <tr><td><code>u16</code></td><td><code>uint16_t</code></td><td>Unsigned integer</td></tr>
+              <tr><td><code>u32</code></td><td><code>uint32_t</code></td><td>Unsigned integer</td></tr>
+              <tr><td><code>u64</code></td><td><code>uint64_t</code></td><td>Unsigned integer</td></tr>
+              <tr><td><code>u128</code></td><td><code>__uint128_t</code> (GCC/Clang)</td><td>Unsigned integer</td></tr>
+              <tr><td><code>usize</code></td><td><code>size_t</code></td><td>Unsigned, platform-width</td></tr>
+              <tr><td><code>i8</code></td><td><code>int8_t</code></td><td>Signed integer</td></tr>
+              <tr><td><code>i16</code></td><td><code>int16_t</code></td><td>Signed integer</td></tr>
+              <tr><td><code>i32</code></td><td><code>int32_t</code></td><td>Signed integer</td></tr>
+              <tr><td><code>i64</code></td><td><code>int64_t</code></td><td>Signed integer</td></tr>
+              <tr><td><code>i128</code></td><td><code>__int128_t</code> (GCC/Clang)</td><td>Signed integer</td></tr>
+              <tr><td><code>isize</code></td><td><code>ptrdiff_t</code></td><td>Signed, platform-width</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Floating-point types</h3>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
+            <tbody>
+              <tr><td><code>f32</code></td><td><code>float</code></td><td>Float</td></tr>
+              <tr><td><code>f64</code></td><td><code>double</code></td><td>Float</td></tr>
+              <tr><td><code>f128</code></td><td><code>__float128</code> (GCC/Clang)</td><td>Float</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Core primitives</h3>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
+            <tbody>
+              <tr><td><code>bool</code></td><td><code>_Bool</code> / <code>stdbool.h</code></td><td>Boolean</td></tr>
+              <tr><td><code>char</code></td><td><code>uint32_t</code></td><td>Unicode codepoint</td></tr>
+              <tr><td><code>void</code></td><td><code>void</code></td><td>Void</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>String</h3>
+        <p><code class="inline">str</code> has no direct C primitive — it is a plain struct:</p>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
+            <tbody>
+              <tr><td><code>str</code></td><td><code>struct { const char* data; size_t len; }</code></td><td>String (struct)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Arrays &amp; slices</h3>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
+            <tbody>
+              <tr><td><code>[N]T</code></td><td><code>T arr[N]</code></td><td>Fixed-size array</td></tr>
+              <tr><td><code>[_]T</code></td><td><code>T arr[N]</code> (size inferred)</td><td>Inferred-size array</td></tr>
+              <tr><td><code>[]T</code></td><td><code>struct { T* ptr; size_t len; }</code></td><td>Slice (fat pointer)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Pointer</h3>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
+            <tbody>
+              <tr><td><code>^T</code></td><td><code>T*</code></td><td>Pointer</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Optional</h3>
+        <p>An optional is a nullable wrapper — no raw null pointers:</p>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
+            <tbody>
+              <tr><td><code>?T</code></td><td><code>struct { T value; bool has_value; }</code></td><td>Optional</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Error unions</h3>
+        <p>Errors are first-class values — a result carries the value <em>or</em> the error:</p>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
+            <tbody>
+              <tr><td><code>!T</code></td><td><code>struct { T value; int err; bool is_err; }</code></td><td>Inferred error union</td></tr>
+              <tr><td><code>E!T</code></td><td><code>struct { T value; E err; bool is_err; }</code></td><td>Explicit error union</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Compounds</h3>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
+            <tbody>
+              <tr><td><code>struct</code></td><td><code>struct</code></td><td>Compound</td></tr>
+              <tr><td><code>enum</code></td><td><code>enum</code> + <code>int</code></td><td>Compound</td></tr>
+              <tr><td><code>union</code></td><td><code>union</code></td><td>Compound</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Heap collections — <code>std.collections</code></h3>
+        <p>Generic library types with no single C equivalent; they use <code class="inline">:T</code> and <code class="inline">:(K, V)</code> syntax:</p>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
+            <tbody>
+              <tr><td><code>hstr</code></td><td>None — heap-managed <code>str</code></td><td>Heap string</td></tr>
+              <tr><td><code>vec:T</code></td><td>None — dynamic array</td><td>Heap collection</td></tr>
+              <tr><td><code>map:(K, V)</code></td><td>None — hash map</td><td>Heap collection</td></tr>
+              <tr><td><code>set:T</code></td><td>None — hash set</td><td>Heap collection</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article id="structs">
+        <h2>Structs</h2>
+        <p>A <strong>struct</strong> is a compound type that tells the compiler how to handle data — with methods and static methods.</p>
+        <h3>Syntax</h3>
+        <div class="syntax-box">struct &lt;identifier&gt; {
+    &lt;field&gt; &lt;type&gt;;
+    …
+
+    fn &lt;identifier&gt;(self ^&lt;type-of-struct&gt;, …) &lt;type&gt; {…}
+    static fn &lt;identifier&gt;() &lt;type&gt; {…}
+    static fn &lt;identifier&gt;(&lt;param&gt; &lt;type&gt;, …) &lt;type&gt; {…}
+}</div>
+        <h3>Example</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.tnc</span></div>
+          <pre><code class="lang-tnc">#import std.io;
+
+// simple struct with method
+struct Point {
+    x f32;
+    y f32;
+
+    fn translate(self ^Point, dx f32, dy f32) void {
+        self^.x += dx;
+        self^.y += dy;
+    }
+
+    fn length(self ^Point) f32 {
+        return sqrt(self^.x * self^.x + self^.y * self^.y);
+    }
+}
+
+// generic struct with method
+struct Pair:T {
+    first T;
+    second T;
+
+    fn swap(self ^Pair:T) void {
+        var tmp T = self^.first;
+        self^.first = self^.second;
+        self^.second = tmp;
+    }
+}
+
+// multi-param generic struct
+struct Map:(K, V) {
+    key K;
+    value V;
+}
+
+fn main() void {
+    var p Point = Point { .x = 1.0, .y = 2.0 };
+    p.translate(0.5, 1.5);
+
+    var pair Pair:i32 = Pair:i32 { .first = 10, .second = 20 };
+    pair.swap();
+    io.println("{any}", p);
+}</code></pre>
+        </div>
+      </article>
+
+      <article id="enums">
+        <h2>Enums</h2>
+        <p>Enums are first-class and can carry data, methods, and static methods.</p>
+        <h3>Example</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.tnc</span></div>
+          <pre><code class="lang-tnc">#import std.{io, collection.*};
+
+enum Direction {
+    North, East, South, West,
+}
+
+// enum with data and method
+enum Shape {
+    Circle(f32),       // radius
+    Rect(f32, f32),    // width, height
+    Point,
+
+    fn area(self ^Shape) f32 {
+        // match on self variant
+    }
+}
+
+enum Literal {
+    String(hstr),
+    Integer(usize),
+    // …
+    // enums can also have methods and static methods, like structs
+}
+
+enum Something:T {
+    First,
+    Second(T),
+}
+
+fn main() void {
+    const direction1 = Direction.North;
+    io.println("{any}", direction1);
+
+    const literal1 = Literal.String(hstr.from("String Literal"));
+    io.println("{any}", literal1); // prints: String("String Literal")
+
+    var s Shape = Shape.Circle(5.0);
+    var a f32 = s.area();
+}</code></pre>
+        </div>
+      </article>
+
+      <article id="unions">
+        <h2>Unions</h2>
+        <p>Unions overlay multiple views over the same memory — with optional methods and generics.</p>
+        <h3>Syntax</h3>
+        <div class="syntax-box">union &lt;Name&gt; { … }                          // simple union with methods
+union &lt;Name&gt;:&lt;T&gt; { … }                        // generic union with methods
+union &lt;Name&gt;:(&lt;T&gt;, &lt;U&gt;, …) { … }               // multi-param generic union</div>
+        <h3>Example</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.tnc</span></div>
+          <pre><code class="lang-tnc">// simple union with method
+union Data {
+    as_int i32;
+    as_float f32;
+    as_bytes [4]u8;
+
+    fn zero(self ^Data) void {
+        self^.as_int = 0;
+    }
+}
+
+// generic union with method
+union Either:T {
+    value T;
+    raw u64;
+
+    fn clear(self ^Either:T) void {
+        self^.raw = 0;
+    }
+}
+
+// multi-param generic union
+union OneOf:(A, B) {
+    a A;
+    b B;
+}
+
+fn main() void {
+    var d Data;
+    d.as_int = 42;
+    d.zero();
+    // d.as_float now reads the same memory as f32
+}</code></pre>
+        </div>
+      </article>
+
+      <article id="arrays">
+        <h2>Arrays</h2>
+        <h3>Array literals</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>arrays.tnc</span></div>
+          <pre><code class="lang-tnc">// array literal
+const message = ['h', 'e', 'l', 'l', 'o'];
+
+// alternative initialization using a result location
+const alt_message [5]u8 = ['h', 'e', 'l', 'l', 'o'];</code></pre>
+        </div>
+        <h3>Multidimensional arrays</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>matrix.tnc</span></div>
+          <pre><code class="lang-tnc">const mat4x5 [4][5]f32 = [
+    [1.0, 0.0, 0.0, 0.0, 0.0],
+    [0.0, 1.0, 0.0, 1.0, 0.0],
+    [0.0, 0.0, 1.0, 0.0, 0.0],
+    [0.0, 0.0, 0.0, 1.0, 9.9],
+];</code></pre>
+        </div>
+        <h3>Sentinel-terminated arrays</h3>
+        <p>The syntax <code class="inline">[N:x]T</code> describes an array with a sentinel element of value <code class="inline">x</code> at the index corresponding to length <code class="inline">N</code>.</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>sentinel.tnc</span></div>
+          <pre><code class="lang-tnc">#import std.testing.expectEqual;
+
+test "0-terminated sentinel array" {
+    const array [_:0]u8 = [1, 2, 3, 4];
+
+    try expectEqual([4:0]u8, @TypeOf(array));
+    try expectEqual(4, array.len);
+    try expectEqual(0, array[4]);
+}</code></pre>
+        </div>
+        <div class="callout warn">
+          <strong>Destructuring arrays</strong> is still being designed — tracked in the repository's issue tracker.
+        </div>
+      </article>
+
+      <article id="switch">
+        <h2>Switch</h2>
+        <p>Tinoc uses <code class="inline">switch</code> for matching on integer or enum values. No parentheses, no fallthrough.</p>
+        <h3>Syntax</h3>
+        <div class="syntax-box">switch &lt;expression&gt; {
+    &lt;value&gt; =&gt; { … }
+    &lt;value&gt; =&gt; { … }
+    _ =&gt; { … }          // default case
+}</div>
+        <h3>Example</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.tnc</span></div>
+          <pre><code class="lang-tnc">enum TokenKind {
+    Int,
+    Ident,
+    Plus,
+    Eof,
+}
+
+fn main() void {
+    var tok TokenKind = TokenKind.Plus;
+
+    switch tok {
+        TokenKind.Int   =&gt; { /* handle int */ }
+        TokenKind.Ident =&gt; { /* handle ident */ }
+        TokenKind.Plus  =&gt; { /* handle plus */ }
+        _               =&gt; { /* default */ }
+    }
+
+    var x i32 = 2;
+
+    switch x {
+        1 =&gt; { /* one */ }
+        2 =&gt; { /* two */ }
+        _ =&gt; { /* anything else */ }
+    }
+}</code></pre>
+        </div>
+        <ul class="note-list">
+          <li>No parentheses around the expression.</li>
+          <li><code class="inline">_</code> is the default case.</li>
+          <li>No fallthrough; each arm is independent.</li>
+          <li>Braces are required per arm.</li>
+        </ul>
+      </article>
+
+      <article id="if-else">
+        <h2>If / Else</h2>
+        <p>Conditional branching with no parentheses around the condition.</p>
+        <h3>Syntax</h3>
+        <div class="syntax-box">if &lt;condition&gt; { … }                                // simple if
+if &lt;condition&gt; { … } else { … }                       // if / else
+if &lt;condition&gt; { … } else if &lt;condition&gt; { … } else { … }   // chain</div>
+        <h3>Example</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.tnc</span></div>
+          <pre><code class="lang-tnc">fn main() void {
+    var x i32 = 10;
+
+    if x &gt; 0 {
+        // positive
+    }
+
+    if x &gt; 0 {
+        // positive
+    } else {
+        // zero or negative
+    }
+
+    if x &gt; 0 {
+        // positive
+    } else if x == 0 {
+        // zero
+    } else {
+        // negative
+    }
+}</code></pre>
+        </div>
+        <ul class="note-list">
+          <li>No parentheses around the condition.</li>
+          <li>Braces are required — no single-line braceless form.</li>
+        </ul>
+      </article>
+
+      <article id="for">
+        <h2>For</h2>
+        <p>Iterate over ranges and collections with a capture binding.</p>
+        <h3>Syntax</h3>
+        <div class="syntax-box">for &lt;start&gt;..&lt;end&gt; |&lt;i&gt;| { … }        // range, capturing index
+for &lt;collection&gt; |&lt;item&gt;| { … }    // collection, capturing item</div>
+        <h3>Example</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.tnc</span></div>
+          <pre><code class="lang-tnc">fn main() void {
+    // range loop — 0 to 9
+    for 0..10 |i| {
+        // i goes 0, 1, 2, … 9
+    }
+
+    // range with a step is done with while, if needed
+    var i i32 = 0;
+    while i &lt; 10 {
+        i += 2;
+    }
+
+    // iterate over a slice
+    var nums [5]i32 = [1, 2, 3, 4, 5];
+    for nums |n| {
+        // n is each element
+    }
+}</code></pre>
+        </div>
+        <ul class="note-list">
+          <li>No parentheses around the range or collection.</li>
+          <li><code class="inline">|i|</code> captures the loop variable — it is a binding, not a closure.</li>
+          <li>Range <code class="inline">0..10</code> is exclusive on the right: it iterates 0 through 9.</li>
+          <li><code class="inline">break</code> exits; <code class="inline">continue</code> skips to the next iteration.</li>
+        </ul>
+      </article>
+
+      <article id="while">
+        <h2>While</h2>
+        <p>Condition-based loops. <code class="inline">while true</code> covers both the infinite loop and do-while patterns.</p>
+        <h3>Syntax</h3>
+        <div class="syntax-box">while &lt;condition&gt; { … }       // loop while condition is true
+while true { … }              // infinite loop</div>
+        <h3>Example</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.tnc</span></div>
+          <pre><code class="lang-tnc">fn main() void {
+    var i i32 = 0;
+
+    // normal while
+    while i &lt; 10 {
+        i += 1;
+    }
+
+    // infinite loop — break to exit
+    while true {
+        if i == 20 {
+            break;
+        }
+        i += 1;
+    }
+
+    // do-while equivalent — run the body first, check at the end
+    while true {
+        i += 1;
+        if i &gt;= 5 {
+            break;
+        }
+    }
+}</code></pre>
+        </div>
+        <ul class="note-list">
+          <li>No parentheses around the condition.</li>
+          <li>Braces are required.</li>
+          <li><code class="inline">while true</code> replaces both infinite loops and do-while patterns from C.</li>
+          <li><code class="inline">break</code> exits; <code class="inline">continue</code> skips to the next iteration.</li>
+        </ul>
+      </article>
+
+      <article id="modules">
+        <h2>Modules</h2>
+        <p><code class="inline">#import</code> resolves modules semantically at compile time — not by text insertion like <code class="inline">#include</code>.</p>
+        <h3>Syntax</h3>
+        <div class="syntax-box">#import &lt;module.path&gt;;          // import a specific module
+#import &lt;module.path&gt;.*;        // import all public exports</div>
+        <h3>Example</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>util.tnc</span></div>
+          <pre><code class="lang-tnc">pub fn add(a i32, b i32) i32 {
+    return a + b;
+}</code></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-block-head"><span>main.tnc</span></div>
+          <pre><code class="lang-tnc">#import std.io;
+#import util;
+#import std.collections.*;
+
+fn main() void {
+    // std.io symbols accessed via the module name
+    io.println("Hello, Tinoc");
+
+    // std.collections.* symbols available directly
+    var v vec:i32;
+
+    const result = util.add(125, 2022);
+    io.println("{any}", result);
+}</code></pre>
+        </div>
+        <ul class="note-list">
+          <li><code class="inline">#import</code> replaces C's <code class="inline">#include</code> — it uses semantic module resolution, not file text insertion.</li>
+          <li><code class="inline">.*</code> imports all public exports from a module into the current scope.</li>
+          <li><code class="inline">pub</code> marks a function, struct, enum, union, const, etc. as public for import.</li>
+          <li>Without <code class="inline">.*</code>, symbols are accessed via the last path segment (e.g. <code class="inline">std.io</code> → <code class="inline">io.println</code>).</li>
+        </ul>
+      </article>
+
+      <article id="preprocessor">
+        <h2>Preprocessor</h2>
+        <p>Directives are marked with a <code class="inline">#</code> prefix and run at compile time.</p>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead><tr><th>Directive</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>#import</code></td><td>Compile-time module resolution — pass the main file (e.g. <code class="inline">main.tnc</code>) and the compiler handles the rest.</td></tr>
+              <tr><td><code>#run</code></td><td>Compile-time execution as an expression or block — useful for metaprogramming.</td></tr>
+              <tr><td><code>#partial</code></td><td>Tells the compiler about a partial implementation of a <code class="inline">switch</code> on an enum.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          Other useful preprocessor directives may be added in future versions — watch the repository.
+        </div>
+      </article>
+
+    </div>
+  </div>
+</main>
+
+<button class="back-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg>
+</button>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo-hero-crop.png" alt="Tinoc" class="nav-logo">
+        <p>A modern systems programming language that transpiles to C99. Meaningful, Accurate, Robust, Maximum Performance, Simple.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Language</h4>
+        <ul>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="docs.html#types">Type reference</a></li>
+          <li><a href="docs.html#operators">Operators</a></li>
+          <li><a href="docs.html#modules">Modules</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <ul>
+          <li><a href="install.html">Install</a></li>
+          <li><a href="https://github.com/tinoc-lang/tinoc" target="_blank" rel="noopener">Source code</a></li>
+          <li><a href="https://github.com/tinoc-lang/tinoc/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/pbarot2009" target="_blank" rel="noopener">Creator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="community.html">Community hub</a></li>
+          <li><a href="https://discord.gg/pzRamyjPUQ" target="_blank" rel="noopener">Discord</a></li>
+          <li><a href="https://github.com/tinoc-lang" target="_blank" rel="noopener">GitHub org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> The Tinoc contributors · Apache-2.0</span>
+      <span>Tinoc — This Is Not C. Made with <span class="heart">♥</span> and C99.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/docs.js"></script>
+</body>
+</html>
