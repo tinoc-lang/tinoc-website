@@ -48,7 +48,7 @@
     <div class="container">
       <span class="eyebrow center">Language reference</span>
       <h1>Tinoc docs</h1>
-      <p>The syntax, semantics, and standard library of Tinoc — written in the open, right alongside the compiler. Click a section to jump in.</p>
+      <p>The syntax, semantics, and standard library of Tinoc, written alongside the compiler in the repository. Click a section to jump in.</p>
     </div>
   </section>
 
@@ -116,8 +116,8 @@
 
       <article id="intro">
         <h2>Getting started</h2>
-        <p class="lead">Tinoc is a modern systems programming language that <strong>transpiles to C99</strong>. Write <code class="inline">.tnc</code> source, emit portable C, compile it with any C99 toolchain, and run everywhere C runs.</p>
-        <p>There is nothing to install yet — the compiler is under active development. These docs describe the language as it is being built; they track the repository, feature by feature.</p>
+        <p class="lead">Tinoc is a systems programming language that <strong>compiles to C99</strong>. Write <code class="inline">.tnc</code> source, emit portable C, and build it with any C99 toolchain.</p>
+        <p>The compiler is under active development, so there is nothing to install yet. These docs describe the language as it is being built and track the repository.</p>
 
         <h3>Hello, world</h3>
         <div class="code-block">
@@ -134,7 +134,7 @@ fn main() void {
         </div>
 
         <h3>What the compiler emits</h3>
-        <p>Transpiling <code class="inline">main.tnc</code> produces readable C99 with a small runtime header — <code class="inline">str</code> becomes a plain struct, and <code class="inline">io.println</code> becomes <code class="inline">printf</code>.</p>
+        <p><code class="inline">main.tnc</code> compiles to readable C99 with a small runtime header. <code class="inline">str</code> becomes a plain struct, and <code class="inline">io.println</code> becomes <code class="inline">printf</code>.</p>
         <div class="code-block">
           <div class="code-block-head"><span>main.c — emitted</span></div>
           <pre><code class="lang-c">#include &lt;stdio.h&gt;
@@ -147,7 +147,7 @@ int main() {
     printf("%s is creator of %s Programming Language!\n", name.data, lang.data);
 }</code></pre>
         </div>
-        <p>The pipeline is <code class="inline">tinoc build main.tnc</code> → <code class="inline">main.c</code> → your C compiler. No runtime, no VM, no garbage collector — just C99.</p>
+        <p>The pipeline is <code class="inline">tinoc build main.tnc</code>, and <code class="inline">main.c</code> goes to your C compiler. There is no runtime, VM, or garbage collector.</p>
       </article>
 
       <article id="variables">
@@ -210,7 +210,7 @@ const binary_mask = 0b1_1111_1111;
 const permissions = 0o7_5_5;
 const big_address = 0xFF80_0000_0000_0000;</code></pre>
         </div>
-        <p>The compiler infers the width of each integer literal — defaulting to <code class="inline">i32</code>, and widening to <code class="inline">i64</code>…<code class="inline">i128</code> when the literal needs more room.</p>
+        <p>The compiler infers the width of each integer literal. It defaults to <code class="inline">i32</code> and widens to <code class="inline">i64</code> or <code class="inline">i128</code> when the value requires it.</p>
         <div class="callout">
           <strong>For values not known at compile time</strong>, add the type explicitly:
           <div class="code-block" style="margin:14px 0 0">
@@ -239,7 +239,7 @@ const lightspeed = 299_792_458.000_000;
 const nanosecond = 0.000_000_001;
 const more_hex = 0x1234_5678.9ABC_CDEFp-10;</code></pre>
         </div>
-        <p>Tinoc has no special syntax for <em>NaN</em>, <em>Infinity (∞)</em>, or <em>Negative Infinity (−∞)</em> — use <code class="inline">std.math</code>.</p>
+        <p>Tinoc has no syntax for NaN, infinity, or negative infinity. Use <code class="inline">std.math</code> for these values.</p>
         <div class="code-block">
           <div class="code-block-head"><span>math.tnc</span></div>
           <pre><code class="lang-tnc">#import std.math;
@@ -252,7 +252,7 @@ const nan = math.nan();</code></pre>
 
       <article id="operators">
         <h2>Operators</h2>
-        <p>Tinoc's operators, their syntax, and what they do:</p>
+        <p>Operators, their syntax, and their behavior:</p>
         <div class="table-wrap">
           <table class="docs-table">
             <thead>
@@ -309,7 +309,7 @@ const nan = math.nan();</code></pre>
 
       <article id="functions">
         <h2>Functions</h2>
-        <p>A <strong>function</strong> is a reusable block of code. Tinoc supports plain, generic, and multi-generic functions.</p>
+        <p>A <strong>function</strong> is a reusable block of code. Tinoc supports plain functions and functions with one or more generic parameters.</p>
         <h3>Syntax</h3>
         <div class="syntax-box">fn &lt;identifier&gt;() &lt;type&gt; {…}
 fn &lt;identifier&gt;(&lt;param&gt; &lt;type&gt;, …) &lt;type&gt; {…}
@@ -350,7 +350,7 @@ fn main() void {
 
       <article id="types">
         <h2>Types</h2>
-        <p class="lead">Tinoc has a rich type system covering primitives, compounds, pointer/optional/error types, and heap-allocated collections.</p>
+        <p class="lead">Tinoc's type system covers primitives, compounds, pointer, optional, and error types, plus heap-allocated collections.</p>
 
         <h3>Integer types</h3>
         <div class="table-wrap">
@@ -398,7 +398,7 @@ fn main() void {
         </div>
 
         <h3>String</h3>
-        <p><code class="inline">str</code> has no direct C primitive — it is a plain struct:</p>
+        <p><code class="inline">str</code> has no direct C primitive. It is a plain struct:</p>
         <div class="table-wrap">
           <table class="docs-table">
             <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
@@ -431,7 +431,7 @@ fn main() void {
         </div>
 
         <h3>Optional</h3>
-        <p>An optional is a nullable wrapper — no raw null pointers:</p>
+        <p>An optional is a nullable wrapper, not a raw pointer:</p>
         <div class="table-wrap">
           <table class="docs-table">
             <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
@@ -442,7 +442,7 @@ fn main() void {
         </div>
 
         <h3>Error unions</h3>
-        <p>Errors are first-class values — a result carries the value <em>or</em> the error:</p>
+        <p>Errors are first-class values. A result carries the value or the error:</p>
         <div class="table-wrap">
           <table class="docs-table">
             <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
@@ -465,7 +465,7 @@ fn main() void {
           </table>
         </div>
 
-        <h3>Heap collections — <code>std.collections</code></h3>
+        <h3>Heap collections (<code>std.collections</code>)</h3>
         <p>Generic library types with no single C equivalent; they use <code class="inline">:T</code> and <code class="inline">:(K, V)</code> syntax:</p>
         <div class="table-wrap">
           <table class="docs-table">
@@ -482,7 +482,7 @@ fn main() void {
 
       <article id="structs">
         <h2>Structs</h2>
-        <p>A <strong>struct</strong> is a compound type that tells the compiler how to handle data — with methods and static methods.</p>
+        <p>A <strong>struct</strong> is a compound type with fields, methods, and static methods.</p>
         <h3>Syntax</h3>
         <div class="syntax-box">struct &lt;identifier&gt; {
     &lt;field&gt; &lt;type&gt;;
@@ -591,7 +591,7 @@ fn main() void {
 
       <article id="unions">
         <h2>Unions</h2>
-        <p>Unions overlay multiple views over the same memory — with optional methods and generics.</p>
+        <p>A union overlays multiple views over the same memory. Unions can have methods and generic parameters.</p>
         <h3>Syntax</h3>
         <div class="syntax-box">union &lt;Name&gt; { … }                          // simple union with methods
 union &lt;Name&gt;:&lt;T&gt; { … }                        // generic union with methods
@@ -671,13 +671,13 @@ test "0-terminated sentinel array" {
 }</code></pre>
         </div>
         <div class="callout warn">
-          <strong>Destructuring arrays</strong> is still being designed — tracked in the repository's issue tracker.
+          <strong>Destructuring arrays</strong> is still being designed. Progress is tracked in the issue tracker.
         </div>
       </article>
 
       <article id="switch">
         <h2>Switch</h2>
-        <p>Tinoc uses <code class="inline">switch</code> for matching on integer or enum values. No parentheses, no fallthrough.</p>
+        <p><code class="inline">switch</code> matches on integer or enum values. There are no parentheses and no fallthrough.</p>
         <h3>Syntax</h3>
         <div class="syntax-box">switch &lt;expression&gt; {
     &lt;value&gt; =&gt; { … }
@@ -755,7 +755,7 @@ if &lt;condition&gt; { … } else if &lt;condition&gt; { … } else { … }   //
         </div>
         <ul class="note-list">
           <li>No parentheses around the condition.</li>
-          <li>Braces are required — no single-line braceless form.</li>
+          <li>Braces are required; there is no single-line braceless form.</li>
         </ul>
       </article>
 
@@ -789,7 +789,7 @@ for &lt;collection&gt; |&lt;item&gt;| { … }    // collection, capturing item</
         </div>
         <ul class="note-list">
           <li>No parentheses around the range or collection.</li>
-          <li><code class="inline">|i|</code> captures the loop variable — it is a binding, not a closure.</li>
+          <li><code class="inline">|i|</code> captures the loop variable. It is a binding, not a closure.</li>
           <li>Range <code class="inline">0..10</code> is exclusive on the right: it iterates 0 through 9.</li>
           <li><code class="inline">break</code> exits; <code class="inline">continue</code> skips to the next iteration.</li>
         </ul>
@@ -839,7 +839,7 @@ while true { … }              // infinite loop</div>
 
       <article id="modules">
         <h2>Modules</h2>
-        <p><code class="inline">#import</code> resolves modules semantically at compile time — not by text insertion like <code class="inline">#include</code>.</p>
+        <p><code class="inline">#import</code> resolves modules at compile time, not by text insertion like <code class="inline">#include</code>.</p>
         <h3>Syntax</h3>
         <div class="syntax-box">#import &lt;module.path&gt;;          // import a specific module
 #import &lt;module.path&gt;.*;        // import all public exports</div>
@@ -868,7 +868,7 @@ fn main() void {
 }</code></pre>
         </div>
         <ul class="note-list">
-          <li><code class="inline">#import</code> replaces C's <code class="inline">#include</code> — it uses semantic module resolution, not file text insertion.</li>
+          <li><code class="inline">#import</code> replaces C's <code class="inline">#include</code>. It resolves modules semantically instead of inserting file text.</li>
           <li><code class="inline">.*</code> imports all public exports from a module into the current scope.</li>
           <li><code class="inline">pub</code> marks a function, struct, enum, union, const, etc. as public for import.</li>
           <li>Without <code class="inline">.*</code>, symbols are accessed via the last path segment (e.g. <code class="inline">std.io</code> → <code class="inline">io.println</code>).</li>
@@ -882,14 +882,14 @@ fn main() void {
           <table class="docs-table">
             <thead><tr><th>Directive</th><th>Purpose</th></tr></thead>
             <tbody>
-              <tr><td><code>#import</code></td><td>Compile-time module resolution — pass the main file (e.g. <code class="inline">main.tnc</code>) and the compiler handles the rest.</td></tr>
-              <tr><td><code>#run</code></td><td>Compile-time execution as an expression or block — useful for metaprogramming.</td></tr>
+              <tr><td><code>#import</code></td><td>Compile-time module resolution. Pass the main file (e.g. <code class="inline">main.tnc</code>) and the compiler handles the rest.</td></tr>
+              <tr><td><code>#run</code></td><td>Compile-time execution as an expression or block. Useful for metaprogramming.</td></tr>
               <tr><td><code>#partial</code></td><td>Tells the compiler about a partial implementation of a <code class="inline">switch</code> on an enum.</td></tr>
             </tbody>
           </table>
         </div>
         <div class="callout">
-          Other useful preprocessor directives may be added in future versions — watch the repository.
+          More directives may be added in future versions.
         </div>
       </article>
 

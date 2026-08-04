@@ -60,8 +60,8 @@
     <img src="logo-hero-crop.png" alt="Tinoc — This Is Not C" class="hero-logo" width="1427" height="439">
     <h1>A modern systems language that<br><span class="accent">transpiles to C99.</span></h1>
     <p class="hero-sub">
-      Tinoc keeps the raw power of C — without the sharp edges. First-class errors,
-      optionals, generics, and compile-time metaprogramming, all emitting portable C99.
+      A systems language that compiles to C99. Errors, optionals, generics, and
+      compile-time metaprogramming are first-class, with no runtime to carry.
     </p>
     <div class="hero-actions">
       <a class="btn btn-primary btn-lg" href="docs.html">
@@ -103,14 +103,14 @@ fn main() void {
   <div class="container">
     <div class="section-head center reveal">
       <span class="eyebrow center">Philosophy</span>
-      <h2>Programming should be <em style="font-style:normal;color:var(--mint)">meaningful</em>, not magical.</h2>
-      <p class="lead">Tinoc respects C and its usage. It is built on five principles that shape every design decision.</p>
+      <h2>Five principles guide the design.</h2>
+      <p class="lead">Tinoc respects C and its ecosystem. These principles shape every design decision.</p>
     </div>
     <div class="philosophy-grid">
-      <div class="phil-card reveal"><span class="num">01</span><h3>Meaningful</h3><p>Code reads like intent — names, syntax, and structure say what they mean.</p></div>
+      <div class="phil-card reveal"><span class="num">01</span><h3>Meaningful</h3><p>Code states its intent. Names, syntax, and structure say what they mean.</p></div>
       <div class="phil-card reveal"><span class="num">02</span><h3>Accurate</h3><p>Types capture the contract. Sizes, optionals, and errors are explicit and checked.</p></div>
-      <div class="phil-card reveal"><span class="num">03</span><h3>Robust</h3><p>Compile-time safety where C silently lies — overflow, nulls, and errors are first-class.</p></div>
-      <div class="phil-card reveal"><span class="num">04</span><h3>Maximum Performance</h3><p>Transpiles to C99, so what you write maps to what the machine does. No runtime tax.</p></div>
+      <div class="phil-card reveal"><span class="num">03</span><h3>Robust</h3><p>Compile-time checks for the cases C leaves to chance: overflow, nulls, and errors.</p></div>
+      <div class="phil-card reveal"><span class="num">04</span><h3>Maximum Performance</h3><p>Compiles to C99 with no runtime. What you write is what the machine runs.</p></div>
       <div class="phil-card reveal"><span class="num">05</span><h3>Simple</h3><p>A small, composable core. One way to read a loop, one way to make a type.</p></div>
     </div>
   </div>
@@ -121,24 +121,24 @@ fn main() void {
   <div class="container">
     <div class="section-head center reveal">
       <span class="eyebrow center">Why Tinoc</span>
-      <h2>C power, engineered for humans.</h2>
-      <p class="lead">Every feature exists to remove a footgun from C while keeping its soul.</p>
+      <h2>C-level control with better defaults.</h2>
+      <p class="lead">Each feature addresses a known weakness of C while keeping its performance and control.</p>
     </div>
     <div class="feature-grid">
       <div class="feature-card reveal">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M9 3v2M15 3v2M9 19v2M15 19v2M3 9h2M3 15h2M19 9h2M19 15h2"/></svg></div>
         <h3>Transpiles to C99</h3>
-        <p>Your <code class="inline">.tnc</code> files become portable C99 with a single tiny runtime header. Runs wherever C runs — embedded to enterprise.</p>
+        <p>Your <code class="inline">.tnc</code> files compile to portable C99 with one small runtime header. It runs anywhere a C99 compiler is available.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></div>
-        <h3>Rich, honest types</h3>
+        <h3>Explicit types</h3>
         <p><code class="inline">i8</code> → <code class="inline">i128</code>, <code class="inline">u8</code> → <code class="inline">u128</code>, <code class="inline">f32/f64/f128</code>, <code class="inline">str</code>, slices, optionals, error unions, and generics.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></div>
-        <h3>Ergonomics without ceremony</h3>
-        <p><code class="inline">if</code>, <code class="inline">while</code>, <code class="inline">switch</code>, and <code class="inline">for</code> with no parentheses. <code class="inline">|i|</code> capture bindings. <code class="inline">orelse</code>, <code class="inline">catch</code>, <code class="inline">?</code> for safe unwraps.</p>
+        <h3>Concise syntax</h3>
+        <p><code class="inline">if</code>, <code class="inline">while</code>, <code class="inline">switch</code>, and <code class="inline">for</code> without parentheses. <code class="inline">|i|</code> capture bindings. <code class="inline">orelse</code>, <code class="inline">catch</code>, and <code class="inline">?</code> for safe unwraps.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg></div>
@@ -148,12 +148,12 @@ fn main() void {
       <div class="feature-card reveal">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
         <h3>Standard library</h3>
-        <p><code class="inline">std.io</code>, <code class="inline">std.math</code> (inf, nan, and friends), and <code class="inline">std.collections</code> — <code class="inline">vec:T</code>, <code class="inline">map:(K,V)</code>, <code class="inline">set:T</code>, <code class="inline">hstr</code>.</p>
+        <p><code class="inline">std.io</code>, <code class="inline">std.math</code> (inf, nan, and other constants), and <code class="inline">std.collections</code> with <code class="inline">vec:T</code>, <code class="inline">map:(K,V)</code>, <code class="inline">set:T</code>, and <code class="inline">hstr</code>.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M6 9v6M20 6l-11 2v8l11 2V6Z"/></svg></div>
         <h3>Built in the open</h3>
-        <p>Active development on GitHub. The syntax, compiler, and docs take shape in public — early contributors welcome.</p>
+        <p>Developed in public on GitHub. The syntax, compiler, and docs are public from day one, and early contributors are welcome.</p>
       </div>
     </div>
   </div>
@@ -168,13 +168,13 @@ fn main() void {
         <h2 style="font-size:clamp(1.8rem,3.4vw,2.5rem)">Small syntax, real structure.</h2>
         <p class="muted">
           A <code class="inline">struct</code> with methods, a generic <code class="inline">Pair:T</code>,
-          and a range <code class="inline">for</code> — each reads almost like English, and all of it
-          compiles down to plain C99.
+          and a range <code class="inline">for</code>. Each construct is small, and all of it
+          compiles to plain C99.
         </p>
         <ul class="note-list">
-          <li>Methods take <code class="inline">self ^Point</code> — mutation is explicit, never hidden.</li>
-          <li>Generics are spelled <code class="inline">:T</code> and <code class="inline">:(K, V)</code> — no template soup.</li>
-          <li>Loops capture with <code class="inline">|i|</code> — a binding, not a closure.</li>
+          <li>Methods take <code class="inline">self ^Point</code>. Mutation is explicit, never hidden.</li>
+          <li>Generics are written <code class="inline">:T</code> and <code class="inline">:(K, V)</code>.</li>
+          <li>Loops capture with <code class="inline">|i|</code>, a binding rather than a closure.</li>
         </ul>
         <div style="margin-top:26px">
           <a class="btn btn-primary" href="docs.html">Explore the language
@@ -228,7 +228,7 @@ fn main() void {
     <div class="section-head center reveal">
       <span class="eyebrow center">Type system</span>
       <h2>Types you can trust.</h2>
-      <p class="lead">Fixed-width integers, floats, strings, slices, optionals, error unions, and heap collections — all explicit.</p>
+      <p class="lead">Fixed-width integers, floats, strings, slices, optionals, error unions, and heap collections. Sizes and layouts are explicit.</p>
     </div>
     <div class="type-grid reveal">
       <div class="type-chip"><code>i8 … i128</code><span>signed integers</span></div>
@@ -255,8 +255,8 @@ fn main() void {
   <div class="container">
     <div class="section-head center reveal">
       <span class="eyebrow center">Documentation</span>
-      <h2>Start reading in five minutes.</h2>
-      <p class="lead">The language reference is written in the open, right alongside the compiler.</p>
+      <h2>Start with the basics.</h2>
+      <p class="lead">The language reference lives next to the compiler in the repository.</p>
     </div>
     <div class="toc-cards">
       <a class="toc-card reveal" href="docs.html#variables">
@@ -287,10 +287,11 @@ fn main() void {
     <div class="split">
       <div class="reveal">
         <span class="eyebrow">Status</span>
-        <h2 style="font-size:clamp(1.8rem,3.4vw,2.5rem)">Taking shape, in public.</h2>
+        <h2 style="font-size:clamp(1.8rem,3.4vw,2.5rem)">Development status</h2>
         <p class="muted">
-          Tinoc is under active development. The compiler, syntax, and tooling are being
-          built in the open — nothing to install yet, but plenty to follow, test, and shape.
+          Tinoc is under active development. The compiler, syntax, and tooling are built
+          in public. There is nothing to install yet, but you can follow the work,
+          run the tests, and contribute.
         </p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
           <a class="btn btn-ghost" href="https://github.com/tinoc-lang/tinoc" target="_blank" rel="noopener">Follow development</a>
@@ -301,11 +302,11 @@ fn main() void {
         <ol class="steps">
           <li>
             <h3>Compiler core</h3>
-            <p>Lexing, parsing, semantic analysis and C99 emission — being built and iterated in the open.</p>
+            <p>Lexing, parsing, semantic analysis, and C99 emission.</p>
           </li>
           <li>
             <h3>Syntax &amp; docs</h3>
-            <p>The language reference you see on this site tracks the compiler, feature by feature.</p>
+            <p>The language reference on this site tracks the compiler feature by feature.</p>
           </li>
           <li>
             <h3>Tooling</h3>
@@ -326,8 +327,8 @@ fn main() void {
   <div class="container">
     <div class="cta-band reveal">
       <span class="eyebrow center">Join the community</span>
-      <h2>Help shape a language.</h2>
-      <p>Follow the repo, join the Discord, and be part of the design conversations — every issue and pull request matters.</p>
+      <h2>Help build the language.</h2>
+      <p>Follow the repository, join the Discord, and take part in design discussions. Every issue and pull request helps.</p>
       <div class="cta-actions">
         <a class="btn btn-primary btn-lg" href="https://discord.gg/pzRamyjPUQ" target="_blank" rel="noopener">
           Join the Discord
