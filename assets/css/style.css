@@ -1,6 +1,6 @@
 /* ============================================================
    TINOC — design system
-   A modern systems programming language that transpiles to C99.
+   A modern systems programming language that transpiles to C11.
    Refined dark · minimal · professional.
    ============================================================ */
 
@@ -1208,6 +1208,152 @@ body {
 /* Comfortable reading measure for docs prose */
 .docs-content article { max-width: 74ch; }
 @media (max-width: 980px) { .docs-content article { max-width: none; } }
+
+/* ---------- Status pills ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+.pill.done {
+  color: var(--mint);
+  background: rgba(94, 234, 212, 0.07);
+  border-color: rgba(94, 234, 212, 0.22);
+}
+.pill.next {
+  color: var(--peach);
+  background: rgba(229, 174, 122, 0.07);
+  border-color: rgba(229, 174, 122, 0.24);
+}
+.support-table td:first-child code,
+.docs-table td code { color: var(--mint-soft); }
+
+/* ---------- Changelog page ---------- */
+.clog-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 40px 0 8px;
+}
+.clog-release {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-2);
+  padding: 34px 38px 40px;
+  margin-top: 28px;
+  box-shadow: var(--shadow-sm);
+}
+.clog-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 22px;
+}
+.clog-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.clog-version {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 1.45rem;
+  letter-spacing: -0.01em;
+  color: var(--mint);
+}
+.clog-date {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}
+.clog-diff {
+  font-size: 0.85rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--ink-dim);
+}
+.clog-diff:hover { color: var(--mint); }
+.clog-intro {
+  color: var(--ink-dim);
+  max-width: 68ch;
+  margin-bottom: 28px;
+}
+.clog-cat {
+  margin-top: 26px;
+  padding-left: 18px;
+  border-left: 2px solid var(--line-strong);
+}
+.clog-cat.added { border-left-color: rgba(94, 234, 212, 0.45); }
+.clog-cat.fixed { border-left-color: rgba(229, 174, 122, 0.5); }
+.clog-cat.changed { border-left-color: rgba(230, 198, 143, 0.5); }
+.clog-cat.security { border-left-color: rgba(239, 176, 205, 0.5); }
+.clog-cat h3 {
+  margin: 0 0 14px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.clog-cat.added h3 { color: var(--mint); }
+.clog-cat.fixed h3 { color: var(--peach); }
+.clog-cat.changed h3 { color: var(--warm); }
+.clog-cat.security h3 { color: var(--rose); }
+.clog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.clog-list li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--ink-dim);
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+.clog-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 8px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink-ghost);
+}
+.clog-cat.added .clog-list li::before { background: var(--mint-dim); }
+.clog-cat.fixed .clog-list li::before { background: var(--peach); }
+.clog-cat.changed .clog-list li::before { background: var(--warm); }
+.clog-cat.security .clog-list li::before { background: var(--rose); }
+.clog-list strong { color: var(--ink); }
+.clog-list code { color: var(--mint-soft); }
+.clog-sub {
+  margin: 8px 0 0;
+  padding-left: 4px;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.clog-sub li { padding-left: 18px; }
+.clog-sub li::before { background: var(--ink-ghost); }
+@media (max-width: 640px) {
+  .clog-release { padding: 26px 20px 30px; }
+  .clog-version { font-size: 1.2rem; }
+}
 
 /* ---------- Motion preferences ---------- */
 @media (prefers-reduced-motion: reduce) {

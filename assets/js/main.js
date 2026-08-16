@@ -6,7 +6,7 @@
      Syntax highlighter (dependency-free)
      ============================================================ */
   const TNC_KEYWORDS =
-    "fn|var|const|struct|enum|union|switch|case|default|if|else|for|while|return|break|continue|import|pub|static|self|try|catch|defer|orelse|and|or|not|test";
+    "fn|var|const|struct|enum|union|module|switch|case|default|if|else|for|while|return|break|continue|import|pub|static|self|try|catch|defer|orelse|and|or|not|null|test";
   const TNC_TYPES =
     "i8|i16|i32|i64|i128|u8|u16|u32|u64|u128|usize|isize|f32|f64|f128|bool|char|void|str|hstr|vec|map|set";
   const C_KEYWORDS =

@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tinoc — Changelog</title>
+<meta name="description" content="All notable changes to Tinoc, documented per Keep a Changelog and SemVer: the module system, generics, optionals, arrays, slices, enums, unions, installers, and the v0.1.0 release.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="The Tinoc contributors">
+<meta name="theme-color" content="#0a0e0d">
+<link rel="canonical" href="https://tinoc-lang.vercel.app/changelog.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tinoc — This Is Not C">
+<meta property="og:title" content="Tinoc — Changelog">
+<meta property="og:description" content="All notable changes to Tinoc, documented per Keep a Changelog and SemVer: the module system, generics, optionals, arrays, slices, enums, unions, installers, and the v0.1.0 release.">
+<meta property="og:url" content="https://tinoc-lang.vercel.app/changelog.html">
+<meta property="og:image" content="https://tinoc-lang.vercel.app/logo-mint.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tinoc — Changelog">
+<meta name="twitter:description" content="All notable changes to Tinoc, documented per Keep a Changelog and SemVer: the module system, generics, optionals, arrays, slices, enums, unions, installers, and the v0.1.0 release.">
+<meta name="twitter:image" content="https://tinoc-lang.vercel.app/logo-mint.jpg">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d2b26'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' font-weight='700' text-anchor='middle' fill='%235eead4'%3ET%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&family=Google+Sans+Code:wght@400..700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Tinoc — Changelog",
+  "description": "All notable changes to Tinoc, documented per Keep a Changelog and SemVer: the module system, generics, optionals, arrays, slices, enums, unions, installers, and the v0.1.0 release.",
+  "url": "https://tinoc-lang.vercel.app/changelog.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Tinoc — This Is Not C",
+    "url": "https://tinoc-lang.vercel.app/"
+  }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav-pill" aria-label="Primary">
+    <a class="nav-brand" href="index.html" aria-label="Tinoc home">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect width="40" height="40" rx="11" fill="#0d2b26"/>
+        <rect width="38" height="38" x="1" y="1" rx="10" fill="none" stroke="rgba(94,234,212,0.3)"/>
+        <path d="M12 9h16v4.6h-5.7v17.4h-4.6V13.6H12z" fill="#5eead4"/>
+      </svg>
+      <span class="brand-word">Tinoc</span>
+    </a>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="docs.html">Docs</a></li>
+      <li><a class="nav-link" href="install.html">Install</a></li>
+      <li><a class="nav-link active" href="changelog.html" aria-current="page">Changelog</a></li>
+      <li><a class="nav-link" href="community.html">Community</a></li>
+      <li class="nav-menu-cta">
+        <a class="btn btn-primary" href="install.html">Get Tinoc</a>
+        <a class="btn btn-ghost" href="https://github.com/tinoc-lang" target="_blank" rel="noopener">GitHub</a>
+      </li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="https://github.com/tinoc-lang" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary btn-sm" href="install.html">Get Tinoc</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow center">Changelog</span>
+      <h1>All notable changes to Tinoc</h1>
+      <p>The format is based on <a href="https://keepachangelog.com/en/1.1.0/" target="_blank" rel="noopener">Keep a Changelog</a>, and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target="_blank" rel="noopener">Semantic Versioning</a>.</p>
+    </div>
+  </section>
+
+  <section class="section section-tight" style="padding-top:0">
+    <div class="container">
+      <div class="clog-nav reveal">
+        <a class="btn btn-ghost btn-sm" href="https://github.com/tinoc-lang/tinoc/releases" target="_blank" rel="noopener">GitHub releases</a>
+        <a class="btn btn-ghost btn-sm" href="https://github.com/tinoc-lang/tinoc/compare/v0.1.0...HEAD" target="_blank" rel="noopener">Compare v0.1.0…HEAD</a>
+        <a class="btn btn-primary btn-sm" href="install.html">Install the latest</a>
+      </div>
+
+      <!-- ============ UNRELEASED ============ -->
+      <article class="clog-release reveal" id="unreleased">
+        <header class="clog-head">
+          <div class="clog-title">
+            <h2 class="clog-version">Unreleased</h2>
+            <span class="pill next">In development</span>
+          </div>
+          <a class="clog-diff" href="https://github.com/tinoc-lang/tinoc/compare/v0.1.0...HEAD" target="_blank" rel="noopener">Diff vs v0.1.0 →</a>
+        </header>
+
+        <div class="clog-cat added">
+          <h3>Added</h3>
+          <ul class="clog-list">
+            <li><strong>Smart module system</strong>: <code class="inline">#import</code> now resolves user modules semantically. Every form is supported — namespace (<code class="inline">#import math;</code>), wildcard (<code class="inline">#import math.*;</code>), single symbol (<code class="inline">#import math.PI;</code>), selected symbols with per-symbol aliases (<code class="inline">#import math.{a, b as c};</code>), namespace aliases (<code class="inline">#import math as m;</code>), submodule paths (<code class="inline">#import shapes.vec;</code>), and quoted file imports (<code class="inline">#import "lib/tools.tnc" as t;</code>). Paths resolve relative to the importing file; <code class="inline">a.b.c</code> finds <code class="inline">a/b/c.tnc</code>, then the directory forms <code class="inline">a/b/c/mod.tnc</code> / <code class="inline">a/b/c/c.tnc</code> — <strong>directories become modules automatically</strong> (<code class="inline">shapes/mod.tnc</code> is the module <code class="inline">shapes</code>). Imports load recursively with cycle detection and cache by absolute path, so diamond imports share one module instance; re-importing the same module is idempotent. Module-name collisions and <code class="inline">std.*</code> imports (not available yet) get clear diagnostics.</li>
+            <li><strong><code class="inline">module</code> keyword</strong>: <code class="inline">module name;</code> names a file's module (files without one take their file stem); <code class="inline">module name { ... }</code> groups declarations into an in-file namespace, with nesting (<code class="inline">module a { module b { ... } }</code> → <code class="inline">a.b.member</code>) and dotted names (<code class="inline">module a.b { ... }</code>). <code class="inline">pub</code> marks exports; private items are rejected when imported (<code class="inline">symbol x is private to module math</code>).</li>
+            <li><strong>Generics end-to-end</strong>: <code class="inline">fn name:T(...)</code>, <code class="inline">struct Name:T { ... }</code>, and <code class="inline">alias Name:T = ...;</code> (including multi-param <code class="inline">:(K, V)</code> forms) are monomorphized — each concrete type-argument set produces one copy with a mangled C name (<code class="inline">Pair:i32</code> → <code class="inline">tnc_Pair_i32</code>), cached per instance. Calls support explicit type arguments (<code class="inline">identity:str(x)</code>) and inference from argument types (<code class="inline">identity(x)</code>), and generics work across module boundaries (<code class="inline">shapes.Circle:f64</code>, <code class="inline">math.identity:i32(42)</code>).</li>
+            <li><strong>Generics importable by name</strong>: pub generic fn/struct/alias templates bind through every import form like plain symbols — <code class="inline">#import math.identity;</code> (bare <code class="inline">identity:i32(42)</code> / inferred <code class="inline">identity(7)</code>), <code class="inline">#import math.identity as id;</code>, <code class="inline">#import math.{Pair};</code> (bare <code class="inline">Pair:f64 { ... }</code>), <code class="inline">#import box.Opt;</code>, and <code class="inline">#import math.*;</code> binds every pub generic bare. A bare instantiation and the qualified call share one mangled C instance (<code class="inline">identity:i32(42)</code> and <code class="inline">math.identity:i32(42)</code> emit a single <code class="inline">tnc_math_identity_i32</code>); private generics report <code class="inline">symbol x is private to module math</code> on both paths; module-block generics are reachable through dotted chains (<code class="inline">math.physics.blockid:i32(42)</code>).</li>
+            <li><strong>Generic bodies compose</strong>: a generic fn/method body may reference the defining module's own generics (<code class="inline">makePair:(K, V)</code> returning <code class="inline">Pair:(K, V) { ... }</code>) — instantiated bodies have their type expressions substituted too, and are checked against the defining module's analyzer, so module-private helpers and consts resolve exactly as in the defining file.</li>
+            <li><strong>Single merged C output</strong>: every loaded module compiles into one C translation unit in load order (imports before importers), with type typedefs, prototypes, and file-scope data hoisted so call order across modules never matters; module items get mangled C names (<code class="inline">math.abs</code> → <code class="inline">tnc_math_abs</code>) so same-named items never collide.</li>
+            <li><strong>Sample module demo</strong>: <code class="inline">samples/modules/</code> — a multi-file demo (<code class="inline">main.tnc</code>, <code class="inline">math.tnc</code>, <code class="inline">shapes/mod.tnc</code>, <code class="inline">shapes/vec.tnc</code>) exercising every import form, the <code class="inline">module</code> keyword (declaration + block), directory modules, and generics across modules; <code class="inline">samples/build.sh</code> runs it alongside the single-file samples.</li>
+            <li><strong>Docs</strong>: <code class="inline">syntax.md</code>'s Modules and Preprocessor sections now document the full <code class="inline">#import</code> grammar, the <code class="inline">module</code> keyword, <code class="inline">pub</code>/private visibility, directories-as-modules, and module resolution rules, plus a new C Interop section covering <code class="inline">#importc</code> (previously undocumented) and <code class="inline">extern "C" fn</code>; the language-support table reflects the module system and generics.</li>
+            <li><strong>Optionals</strong>: <code class="inline">?T</code> — a <code class="inline">{ T value; bool has_value; }</code> wrapper emitted as a named typedef (<code class="inline">?i32</code> → <code class="inline">tnc_opt_i32</code>), with <code class="inline">null</code> as the empty value, <code class="inline">x orelse fallback</code> defaulting (the fallback is only evaluated when the optional is null), <code class="inline">x?</code> payload unwrap, and <code class="inline">== null</code> / <code class="inline">!= null</code> presence checks. A plain <code class="inline">T</code> value (or <code class="inline">null</code>) auto-wraps into a <code class="inline">?T</code> wherever one is expected — initializers, call arguments, return values, assignments — and untyped literals adapt to the payload type (<code class="inline">var x ?f64 = 5;</code>). Comparing an optional with a non-null value, <code class="inline">orelse</code> on a non-optional, <code class="inline">?</code> on a non-optional, and optionals of arrays or <code class="inline">void</code> are all rejected with clear diagnostics. Sample: <code class="inline">samples/23_optionals.tnc</code>.</li>
+            <li><strong>Arrays</strong>: <code class="inline">[N]T</code>, <code class="inline">[_]T</code> (size inferred from the literal), and <code class="inline">[N:x]T</code> sentinel-terminated arrays — array literals with inferred or explicit element types, index access and element assignment (<code class="inline">arr[i]</code>, <code class="inline">arr[i] = v</code>), the <code class="inline">.len</code> property (compile-time constant for arrays), and <code class="inline">for arr |x|</code> collection iteration. Multidimensional row-major arrays (<code class="inline">[4][5]f32</code>) support chained indexing (<code class="inline">mat[i][j]</code>) and row-by-row iteration; iterating a multidimensional array directly is rejected with a hint.</li>
+            <li><strong>Slices</strong>: <code class="inline">[]T</code> — a fat pointer <code class="inline">{ ptr: ^T, len: usize }</code> that views an array's storage. Arrays convert implicitly to slices at call sites and in assignments, so functions take collections as slices (<code class="inline">fn total(s []i32)</code>), index and mutate through them (write-through to the backing array), read <code class="inline">.len</code> at runtime, and iterate with <code class="inline">for s |v|</code>. Array parameters, array returns, and whole-array assignment are rejected with a "use a slice" diagnostic; slice types are emitted as named typedefs (<code class="inline">tnc_slice_i32</code>) so prototypes and definitions share one C type.</li>
+            <li><strong>Samples</strong>: <code class="inline">samples/19_array_basics.tnc</code> through <code class="inline">samples/22_array_functions.tnc</code> covering array literals/types, slices and implicit conversion, multidimensional + sentinel arrays, and functions over collections.</li>
+            <li><strong>Docs</strong>: <code class="inline">syntax.md</code>'s Array section (previously a placeholder) now documents arrays, slices, multidimensional arrays, and sentinel-terminated arrays with working examples.</li>
+            <li><strong><code class="inline">tinoc version</code> / <code class="inline">tinoc help</code></strong>: the CLI now reports project metadata — the GitHub repository (<code class="inline">tinoc-lang/tinoc</code>), the creator's GitHub (<code class="inline">pbarot2009</code>), the official website, and the license — in <code class="inline">tinoc version</code>, the <code class="inline">Links</code> section of <code class="inline">tinoc help</code>, and the new <code class="inline">tinoc help version</code> screen.</li>
+            <li><strong>Enums</strong>: <code class="inline">enum Name { Variant, Other(type), ... }</code> — fieldless variants compile to plain C enums; variants with payloads become tagged unions (tag + per-variant anonymous struct), so multi-field payloads never overlap. Enums support instance methods (<code class="inline">self ^Name</code>), static methods, equality, and being passed/returned like any other type.</li>
+            <li><strong>Enum <code class="inline">switch</code></strong>: exhaustive enum switches (all variants listed, no <code class="inline">_</code> arm needed) with pattern binding — <code class="inline">Shape.Rect(w, h) =&gt; { ... }</code> binds the payload fields directly; <code class="inline">_</code> wildcards discard a payload slot. Missing-return analysis understands exhaustive enum switches.</li>
+            <li><strong>Unions</strong>: <code class="inline">union Name { field type; ... }</code> with C-style shared-memory fields — writing <code class="inline">as_int</code> and reading <code class="inline">as_float</code> reinterprets the same bytes (IEEE-754 punning works end-to-end). Unions reuse struct field syntax, support instance methods (<code class="inline">self ^Name</code>) and static methods, and reject comparisons/arithmetic with clear diagnostics.</li>
+            <li><strong>Samples</strong>: <code class="inline">samples/14_enum_basics.tnc</code> through <code class="inline">samples/17_str_strings.tnc</code> covering fieldless enums, tagged unions with pattern matching, enum methods, and <code class="inline">str</code> semantics, plus <code class="inline">samples/18_combo.tnc</code>, which exercises structs, enums (pattern matching), unions (type punning), <code class="inline">str</code>, <code class="inline">switch</code>, and methods all in one program.</li>
+            <li><strong>Installers</strong>: <code class="inline">install.sh</code> / <code class="inline">install.ps1</code> fetch the latest GitHub release, verify it against the release <code class="inline">SHA256SUMS</code> manifest, and extract it into <code class="inline">~/.tinoc/</code> — with <code class="inline">VERSION</code> tracking, update checks that ask before upgrading, <code class="inline">--local</code> source builds, <code class="inline">--check</code>, <code class="inline">--uninstall</code>, and <code class="inline">--version</code> / <code class="inline">--force</code> / <code class="inline">--dir</code> flags.</li>
+            <li><strong>CI workflow</strong> (<code class="inline">.github/workflows/ci.yml</code>) runs on every push and pull request: deps, fmt-check, vet, lint, race tests, and a release build (<code class="inline">build.sh ci</code> / <code class="inline">build.ps1 ci</code>) across ubuntu/macos/windows, plus an installer smoke test in <code class="inline">--local</code> mode.</li>
+            <li>The release workflow now attaches a <code class="inline">SHA256SUMS</code> manifest to every release, so installers can verify downloads.</li>
+            <li><strong><code class="inline">.gitattributes</code></strong>: Go and shell sources are pinned to LF line endings on checkout everywhere, so <code class="inline">gofmt -l</code> no longer false-fails on Windows CI (where git used to check out CRLF).</li>
+          </ul>
+        </div>
+
+        <div class="clog-cat fixed">
+          <h3>Fixed</h3>
+          <ul class="clog-list">
+            <li><strong><code class="inline">#importc</code> local headers next to modules in subdirectories</strong>: a module file importing its own local header (<code class="inline">#importc "vecmath.h"</code> inside <code class="inline">lib/mathc.tnc</code> with <code class="inline">vecmath.h</code> beside it) emitted the right quoted include into the merged C, but the C compile step only put the <em>entry file's</em> directory on the include path — so the header was not found and the build failed. <code class="inline">compileGeneratedC</code> now receives every loaded module's directory as an <code class="inline">-I</code> path (in load order, deduplicated), so local headers resolve wherever they live.</li>
+            <li><strong>Generic struct instantiation recursion</strong>: a generic method whose signature references the struct's own type (<code class="inline">fn sum(self ^Pair:T)</code>) re-entered instantiation while the instance was still being built and recursed forever (clone → register method → resolve signature → re-instantiate). Instances are now cached before their method signatures resolve, so the re-entrant call hits the cache.</li>
+            <li><strong>Generic bodies kept stale type parameters</strong>: after monomorphization a generic body's type expressions still carried the template's type parameters (<code class="inline">return Pair:(K, V) { ... }</code> inside a <code class="inline">makePair:(K, V)</code> instance), so re-checking the body failed on K/V. <code class="inline">substituteBodyTypes</code> now rewrites every reachable type expression in the cloned body from the same substitution environment as the signature.</li>
+            <li><strong>Cross-module generic instances checked against the caller</strong>: method and fn bodies of a generic instantiated from another module were checked in the caller's scope, so module-private names referenced by the body did not resolve. Instances now carry the defining module's analyzer, and the caller's concrete type arguments are mirrored into it, so bodies resolve module-local helpers/consts and caller-provided types alike.</li>
+            <li><strong>Stale <code class="inline">#importc</code> parse cache</strong>: the disk cache keyed only on the wrapper text and dumper identity, so two <code class="inline">#importc "vecmath.h"</code> from different directories (or an edited local header) could be served the stale parse of a different file under the same name — silently missing or wrong declarations. The key now folds in each local header's resolved absolute path plus a hash of its current contents, so same-named headers across directories and edits always re-parse.</li>
+            <li><strong>Module-file blocks unreachable from importers</strong>: a <code class="inline">module name { ... }</code> block inside a module file (<code class="inline">module math;</code> … <code class="inline">module physics { pub const g; }</code>) could not be reached cross-module — <code class="inline">math.physics.g</code> failed with "module math has no public member physics". Blocks now publish a pub-only projection into the file module's namespace, so dotted chains (<code class="inline">math.physics.g</code>, <code class="inline">math.physics.weight</code>) resolve, nested blocks chain (<code class="inline">math.a.b.VAL</code>), and private block members stay file-private with a clear diagnostic.</li>
+            <li><strong>Private <code class="inline">const</code>/<code class="inline">var</code> diagnostics</strong>: importing a private top-level <code class="inline">const</code>/<code class="inline">var</code> reported "module x has no public symbol y"; it now reports "symbol y is private to module x", matching private functions. Private globals are tracked per module and checked in both the symbol-import and qualified-access paths.</li>
+            <li><strong>Module <code class="inline">str</code> globals</strong>: top-level <code class="inline">const</code>/<code class="inline">var</code> of type <code class="inline">str</code> (or arrays/slices of <code class="inline">str</code>) in module files emitted invalid C (<code class="inline">static const str x = tinoc_str_lit(...)</code> — a function call in a static-storage initializer). Literals now emit a constant brace initializer (<code class="inline">{ .data = "...", .len = N }</code>); other str initializers fall back to external linkage. This broke wildcard-imported string constants.</li>
+            <li><strong>Nested module blocks</strong>: <code class="inline">module a { module b { pub const VAL; } }</code> failed to resolve <code class="inline">a.b.VAL</code> — block views registered only under their local segment, so dotted chains through nested/dotted block namespaces now register every dotted prefix of the full name.</li>
+            <li><strong>Dead module globals</strong>: unreferenced private top-level <code class="inline">const</code>/<code class="inline">var</code> in module files are no longer emitted into the merged C output (they were always emitted as <code class="inline">static</code>, making the C compiler warn with <code class="inline">-Wunused-const-variable</code>/<code class="inline">-Wunused-variable</code> and padding the output with dead data). A global is kept when it is <code class="inline">pub</code> (reachable through its module namespace, e.g. <code class="inline">math.PI</code>), a <code class="inline">module name { ... }</code> block member, or referenced by a bare identifier anywhere in the compilation.</li>
+            <li><strong>CI / C-interop tests</strong>: the <code class="inline">#importc</code> error-checking tests (<code class="inline">TestCImport_UndefinedMember</code>, <code class="inline">TestCImport_WrongArgCount</code>, <code class="inline">TestCImport_WrongArgType</code>, <code class="inline">TestCImport_DuplicateAlias</code>) now skip when no clang or gcc is available to parse C headers, matching the rest of the suite (<code class="inline">requireCC</code>, <code class="inline">TestCImport_ExternVars</code>). Previously they hard-failed on runners without a C toolchain — e.g. the Windows CI runner — which broke <code class="inline">build.sh ci</code> / <code class="inline">build.ps1 ci</code> on both push and pull-request events.</li>
+            <li><strong><code class="inline">tinoc run</code> no longer leaves binaries behind</strong>: the compiled binary is written to a temporary work directory and removed as soon as the program finishes, so <code class="inline">tinoc run</code> leaves no artifacts in the working directory (pass <code class="inline">-o &lt;path&gt;</code> to keep one). The generated-C scratch directory is also cleaned up after both <code class="inline">build</code> and <code class="inline">run</code> — it previously leaked in the system temp dir on every invocation.</li>
+            <li><strong>Float literals</strong>: underscore digit separators (e.g. <code class="inline">1_000.5</code>) are now stripped before emission into C, so float literals with separators no longer generate C that fails to compile.</li>
+            <li><strong>For-collection loops</strong>: the loop index is compared against the collection length as <code class="inline">size_t</code>, eliminating a <code class="inline">-Wsign-compare</code> warning when iterating slices (and the generated loop now binds the collection once, evaluating it exactly once).</li>
+            <li><strong>Slice <code class="inline">.len</code></strong>: typed as <code class="inline">i32</code> so <code class="inline">i &lt; s.len</code> type-checks; codegen casts the C <code class="inline">size_t</code> field so user comparisons do not trigger <code class="inline">-Wsign-compare</code>.</li>
+            <li><strong>Const arrays</strong>: iterating a <code class="inline">const</code> array no longer emits a <code class="inline">-Wdiscarded-qualifiers</code> warning (the loop uses a const pointer).</li>
+            <li><strong>Compiler</strong>: calling an instance method that was declared without a <code class="inline">self</code> parameter (e.g. <code class="inline">fn make() Data { ... }</code> inside a struct/union body, invoked as <code class="inline">d.make()</code>) previously panicked with an index-out-of-range error; it now reports a proper "needs a self parameter" diagnostic.</li>
+            <li><strong><code class="inline">str</code></strong>: <code class="inline">&lt;</code>, <code class="inline">&gt;</code>, <code class="inline">&lt;=</code>, <code class="inline">&gt;=</code> on <code class="inline">str</code> are now rejected with a clear diagnostic (only <code class="inline">==</code>/<code class="inline">!=</code> are defined, via content comparison) instead of emitting invalid C. Switching on a <code class="inline">str</code> is likewise a proper semantic error. <code class="inline">str ==</code>/<code class="inline">!=</code> compare by content through the <code class="inline">tinoc_str_eq</code> runtime helper.</li>
+            <li><strong>Installers</strong>: <code class="inline">--local</code> no longer prompts to "update" when the built version equals the installed version — the fresh source build is installed directly. Re-running the installer with the latest version already installed now exits before downloading anything.</li>
+            <li><strong>Installers</strong>: <code class="inline">--force</code>/<code class="inline">--yes</code> now actually reinstalls over an identical installed version instead of reporting "already installed".</li>
+            <li><strong>CLI</strong>: color output is only emitted when stdout is a real terminal, so piped commands like <code class="inline">tinoc version | awk ...</code> return plain text (this was breaking the installer's version parsing on systems with TERM set).</li>
+            <li><strong>Version reporting</strong>: <code class="inline">build.sh</code> / <code class="inline">build.ps1</code> now inject the version into <code class="inline">src.Version</code> via <code class="inline">-ldflags</code> (the old <code class="inline">-X main.version</code> target never existed, so release binaries always reported the hardcoded <code class="inline">0.1.0</code>).</li>
+            <li><strong>Installers</strong>: installed-version comparisons normalize a leading <code class="inline">v</code>, so a <code class="inline">VERSION</code> file written as <code class="inline">v0.1.0</code> (e.g. by an earlier installer) is correctly treated as equal to <code class="inline">0.1.0</code> instead of triggering a spurious "update available" prompt.</li>
+            <li><strong>Installers</strong>: <code class="inline">--verbose</code> now prints the download/fetch commands it runs.</li>
+            <li><strong>Installers</strong>: confirmation prompts now decline gracefully when there is no interactive terminal (CI, piped input, cron) instead of aborting the whole install with an error — the binary still installs and manual PATH instructions are printed.</li>
+            <li><strong>Installers</strong>: the update prompt now appears <em>before</em> the download starts, so a declined update never wastes bandwidth on a full release download.</li>
+            <li><strong><code class="inline">install.ps1</code></strong> now detects the real OS and architecture (linux/darwin/windows × amd64/arm64) and installs the matching binary name, making it fully cross-platform under PowerShell 7+ — matching <code class="inline">install.sh</code>. It also prefers the repo's <code class="inline">build.sh</code> when running <code class="inline">-Local</code> on macOS/Linux.</li>
+            <li><strong><code class="inline">build.ps1</code></strong>: OS/architecture detection now matches <code class="inline">build.sh</code>, so <code class="inline">install.ps1 -Local</code> on macOS/Linux cross-targets correctly.</li>
+            <li><strong><code class="inline">install.sh</code></strong>: archive binary discovery no longer relies on the GNU-only <code class="inline">find -maxdepth</code>, which errored on macOS's BSD find; it also offers to create a missing shell rc file when adding <code class="inline">~/.tinoc/bin</code> to PATH.</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ============ 0.1.0 ============ -->
+      <article class="clog-release reveal" id="v0-1-0">
+        <header class="clog-head">
+          <div class="clog-title">
+            <h2 class="clog-version">0.1.0</h2>
+            <span class="clog-date">2026-08-05</span>
+            <span class="pill done">Released</span>
+          </div>
+          <a class="clog-diff" href="https://github.com/tinoc-lang/tinoc/releases/tag/v0.1.0" target="_blank" rel="noopener">Release v0.1.0 →</a>
+        </header>
+        <p class="clog-intro">First public release. Tinoc transpiles to <strong>C11</strong> and ships a CLI with <code class="inline">build</code>, <code class="inline">run</code>, and <code class="inline">check</code> subcommands (<code class="inline">-l/--lex</code>, <code class="inline">-a/--ast</code>, <code class="inline">-c/--emit-c</code> pipeline cutoffs).</p>
+
+        <div class="clog-cat added">
+          <h3>Added</h3>
+          <ul class="clog-list">
+            <li><strong>Core declarations</strong>: <code class="inline">var</code>, <code class="inline">const</code>, <code class="inline">static var</code>, <code class="inline">static const</code> with explicit or inferred types, const-mutability enforcement, and redeclaration/shadowing checks.</li>
+            <li><strong>Functions</strong>: <code class="inline">fn name(params...) Ret { ... }</code> with forward calls, duplicate-parameter detection, argument count/type checking, return-type agreement, and missing-return analysis.</li>
+            <li><strong>Structs</strong>: <code class="inline">struct Name { ... }</code> with typed fields, struct literals (<code class="inline">Point { .x = 1.0, .y = 2.0 }</code>), field access, instance methods (<code class="inline">fn m(self ^Name, ...)</code> mutating through <code class="inline">self^.field</code>), static methods, struct-typed params/returns, and by-value copy semantics. Self-referencing structs (<code class="inline">struct Node { next ^Node; }</code>) work via pointers.</li>
+            <li><strong>Pointers</strong>: <code class="inline">^T</code> types, <code class="inline">&amp;x</code> address-of, <code class="inline">x^</code> dereference, pointer params/returns, <code class="inline">null</code> comparison.</li>
+            <li><strong>Control flow</strong>: <code class="inline">if</code> / <code class="inline">else if</code> / <code class="inline">else</code>, <code class="inline">while</code>, range <code class="inline">for</code> (<code class="inline">for 0..10 |i| { ... }</code>), <code class="inline">break</code>, <code class="inline">continue</code>.</li>
+            <li><strong>Literals &amp; operators</strong>: integers (decimal/hex/octal/binary with <code class="inline">_</code> separators), floats, strings, chars, bools, <code class="inline">null</code>; arithmetic, comparison, logical (<code class="inline">and</code>/<code class="inline">or</code>), and bitwise operators; wrapping arithmetic (<code class="inline">+%</code>, <code class="inline">-%</code>, <code class="inline">*%</code>).</li>
+            <li><strong>C interop</strong>:
+              <ul class="clog-sub">
+                <li><code class="inline">#importc "header.h" [as alias];</code> — parses real C headers via clang's JSON AST (or gcc's <code class="inline">-aux-info</code> fallback) for type-safe calls and constants.</li>
+                <li><code class="inline">extern "C" fn name(.symbol)?(...) Ret;</code> — hand-declared C functions with automatic <code class="inline">str</code> → <code class="inline">char*</code> argument unwrapping.</li>
+              </ul>
+            </li>
+            <li><strong>Runtime header</strong> (<code class="inline">tinoc.h</code>): C11 type aliases (<code class="inline">u8</code>..<code class="inline">i128</code>, <code class="inline">f32</code>/<code class="inline">f64</code>, <code class="inline">str</code>, <code class="inline">char32</code>), slice/optional/error-union helpers, and <code class="inline">_Generic</code> saturating arithmetic dispatch.</li>
+            <li><strong>Samples</strong>: <code class="inline">samples/00_*.tnc</code> through <code class="inline">samples/13_*.tnc</code> covering the supported feature set (including struct basics, methods, nested/pointer structs, and a scoreboard example).</li>
+            <li><strong>Tooling</strong>: <code class="inline">build.sh</code> / <code class="inline">build.ps1</code> (build, test, vet, fmt, lint, install, cross-compile), embedded <code class="inline">tinoc.h</code>, and a GitHub Actions release workflow that publishes binaries as <code class="inline">.tar.gz</code> / <code class="inline">.zip</code> archives on tag push.</li>
+          </ul>
+        </div>
+
+        <div class="clog-cat changed">
+          <h3>Changed</h3>
+          <ul class="clog-list">
+            <li>Transpile target moved to <strong>C11</strong> (was C99) to enable <code class="inline">_Generic</code>-based runtime features and future type-system growth.</li>
+            <li>Postfix <code class="inline">^</code> dereference now binds at postfix precedence, so expressions like <code class="inline">a * self^.x</code> parse correctly.</li>
+          </ul>
+        </div>
+
+        <div class="clog-cat fixed">
+          <h3>Fixed</h3>
+          <ul class="clog-list">
+            <li>Comparison operators now adapt untyped literals (<code class="inline">f32Val &gt; 0.0</code>), matching the arithmetic branch.</li>
+          </ul>
+        </div>
+
+        <div class="clog-cat security">
+          <h3>Security</h3>
+          <ul class="clog-list">
+            <li>No known security issues.</li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="clog-nav reveal" style="margin-top:56px">
+        <a class="btn btn-ghost btn-sm" href="docs.html">Read the language reference</a>
+        <a class="btn btn-primary btn-sm" href="install.html">Install Tinoc</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-brand" href="index.html" aria-label="Tinoc home">
+          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+            <rect width="40" height="40" rx="11" fill="#0d2b26"/>
+            <rect width="38" height="38" x="1" y="1" rx="10" fill="none" stroke="rgba(94,234,212,0.3)"/>
+            <path d="M12 9h16v4.6h-5.7v17.4h-4.6V13.6H12z" fill="#5eead4"/>
+          </svg>
+          <span class="brand-word">Tinoc</span>
+        </a>
+        <p>A modern systems programming language that transpiles to C11. Meaningful, Accurate, Robust, Maximum Performance, Simple.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Language</h4>
+        <ul>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="docs.html#types">Type reference</a></li>
+          <li><a href="docs.html#operators">Operators</a></li>
+          <li><a href="docs.html#modules">Modules</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <ul>
+          <li><a href="install.html">Install</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
+          <li><a href="https://github.com/tinoc-lang/tinoc" target="_blank" rel="noopener">Source code</a></li>
+          <li><a href="https://github.com/tinoc-lang/tinoc/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/pbarot2009" target="_blank" rel="noopener">Creator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="community.html">Community hub</a></li>
+          <li><a href="https://discord.gg/pzRamyjPUQ" target="_blank" rel="noopener">Discord</a></li>
+          <li><a href="https://github.com/tinoc-lang" target="_blank" rel="noopener">GitHub org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> The Tinoc contributors · Apache-2.0</span>
+      <span>Tinoc — This Is Not C. Made with <span class="heart">♥</span> and C11.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

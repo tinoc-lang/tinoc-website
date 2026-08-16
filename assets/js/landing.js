@@ -76,7 +76,7 @@
   }
 
   /* ============================================================
-     Demo code window — type the Tinoc source, toggle to C99
+     Demo code window — type the Tinoc source, toggle to C11
      ============================================================ */
   const windowBody = document.getElementById("demo-window");
   if (windowBody) {
@@ -121,9 +121,9 @@
       pre.innerHTML = hl.highlight(shown, document.body.dataset.demoLang === "c" ? "c" : "tnc");
       pre.classList.toggle("cursor-blink", document.body.dataset.demoLang !== "c" && typed < TNC.length);
       if (footer) {
-        footer.innerHTML = document.body.dataset.demoLang === "c"
-          ? '<span class="ok">✓</span> emitted <code>main.c</code> — ready for any C99 compiler'
-          : '<span class="ok">●</span> typing <code>main.tnc</code> — watch it transpile';
+      footer.innerHTML = document.body.dataset.demoLang === "c"
+        ? '<span class="ok">✓</span> emitted <code>main.c</code> — ready for any C11 compiler'
+        : '<span class="ok">●</span> typing <code>main.tnc</code> — watch it transpile';
       }
     }
 
