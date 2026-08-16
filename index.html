@@ -3,15 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Tinoc — A Modern Systems Language That Transpiles to C99</title>
-<meta name="description" content="Tinoc (This Is Not C) is a modern systems programming language that transpiles to C99. Meaningful, accurate, robust, maximum performance, simple.">
+<title>Tinoc — A Modern Systems Language That Transpiles to C11</title>
+<meta name="description" content="Tinoc (This Is Not C) is a modern systems programming language that transpiles to C11. Meaningful, accurate, robust, maximum performance, simple. Install the latest release with one command.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="The Tinoc contributors">
+<meta name="theme-color" content="#0a0e0d">
+<link rel="canonical" href="https://tinoc-lang.vercel.app/">
 
-<meta property="og:title" content="Tinoc — This Is Not C">
-<meta property="og:description" content="A modern systems programming language that transpiles to C99. Meaningful, Accurate, Robust, Maximum Performance, Simple.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Tinoc — This Is Not C">
+<meta property="og:title" content="Tinoc — This Is Not C">
+<meta property="og:description" content="A modern systems programming language that transpiles to C11. Meaningful, Accurate, Robust, Maximum Performance, Simple.">
 <meta property="og:url" content="https://tinoc-lang.vercel.app/">
 <meta property="og:image" content="https://tinoc-lang.vercel.app/logo-mint.jpg">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tinoc — This Is Not C">
+<meta name="twitter:description" content="A modern systems programming language that transpiles to C11. Meaningful, Accurate, Robust, Maximum Performance, Simple.">
+<meta name="twitter:image" content="https://tinoc-lang.vercel.app/logo-mint.jpg">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d2b26'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' font-weight='700' text-anchor='middle' fill='%235eead4'%3ET%3C/text%3E%3C/svg%3E">
 
@@ -20,6 +29,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&family=Google+Sans+Code:wght@400..700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "Tinoc",
+  "alternateName": "This Is Not C",
+  "description": "Tinoc (This Is Not C) is a modern systems programming language that transpiles to C11. Meaningful, Accurate, Robust, Maximum Performance, Simple.",
+  "url": "https://tinoc-lang.vercel.app/",
+  "codeRepository": "https://github.com/tinoc-lang/tinoc",
+  "programmingLanguage": ["Tinoc", "C"],
+  "license": "https://www.apache.org/licenses/LICENSE-2.0",
+  "author": {
+    "@type": "Organization",
+    "name": "The Tinoc contributors",
+    "url": "https://github.com/tinoc-lang"
+  },
+  "maintainer": {
+    "@type": "Person",
+    "name": "Prathmesh Barot",
+    "url": "https://github.com/pbarot2009"
+  },
+  "softwareVersion": "0.1.0"
+}
+</script>
 </head>
 <body>
 
@@ -37,6 +71,7 @@
     <ul class="nav-links">
       <li><a class="nav-link" href="docs.html">Docs</a></li>
       <li><a class="nav-link" href="install.html">Install</a></li>
+      <li><a class="nav-link" href="changelog.html">Changelog</a></li>
       <li><a class="nav-link" href="community.html">Community</a></li>
       <li class="nav-menu-cta">
         <a class="btn btn-primary" href="install.html">Get Tinoc</a>
@@ -58,17 +93,18 @@
 <section class="hero">
   <div class="hero-inner">
     <img src="logo-hero-crop.png" alt="Tinoc — This Is Not C" class="hero-logo" width="1427" height="439">
-    <h1>A modern systems language that<br><span class="accent">transpiles to C99.</span></h1>
+    <h1>A modern systems language that<br><span class="accent">transpiles to C11.</span></h1>
     <p class="hero-sub">
-      A systems language that compiles to C99. Errors, optionals, generics, and
+      A systems language that compiles to C11. Optionals, generics, and
       compile-time metaprogramming are first-class, with no runtime to carry.
+      Error unions are next on the roadmap.
     </p>
     <div class="hero-actions">
-      <a class="btn btn-primary btn-lg" href="docs.html">
-        Read the docs
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <a class="btn btn-primary btn-lg" href="install.html">
+        Install Tinoc
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M6 9l6 6 6-6"/></svg>
       </a>
-      <a class="btn btn-ghost btn-lg" href="install.html">Get Tinoc</a>
+      <a class="btn btn-ghost btn-lg" href="docs.html">Read the docs</a>
       <a class="btn btn-ghost btn-lg" href="https://github.com/tinoc-lang/tinoc" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.1 11.1 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.67.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
         Star on GitHub
@@ -110,7 +146,7 @@ fn main() void {
       <div class="phil-card reveal"><span class="num">01</span><h3>Meaningful</h3><p>Code states its intent. Names, syntax, and structure say what they mean.</p></div>
       <div class="phil-card reveal"><span class="num">02</span><h3>Accurate</h3><p>Types capture the contract. Sizes, optionals, and errors are explicit and checked.</p></div>
       <div class="phil-card reveal"><span class="num">03</span><h3>Robust</h3><p>Compile-time checks for the cases C leaves to chance: overflow, nulls, and errors.</p></div>
-      <div class="phil-card reveal"><span class="num">04</span><h3>Maximum Performance</h3><p>Compiles to C99 with no runtime. What you write is what the machine runs.</p></div>
+      <div class="phil-card reveal"><span class="num">04</span><h3>Maximum Performance</h3><p>Transpiles to C11 with no runtime. What you write is what the machine runs.</p></div>
       <div class="phil-card reveal"><span class="num">05</span><h3>Simple</h3><p>A small, composable core. One way to read a loop, one way to make a type.</p></div>
     </div>
   </div>
@@ -127,18 +163,18 @@ fn main() void {
     <div class="feature-grid">
       <div class="feature-card reveal">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M9 3v2M15 3v2M9 19v2M15 19v2M3 9h2M3 15h2M19 9h2M19 15h2"/></svg></div>
-        <h3>Transpiles to C99</h3>
-        <p>Your <code class="inline">.tnc</code> files compile to portable C99 with one small runtime header. It runs anywhere a C99 compiler is available.</p>
+        <h3>Transpiles to C11</h3>
+        <p>Your <code class="inline">.tnc</code> files compile to portable C11 with one small runtime header. It runs anywhere a C11 compiler is available.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></div>
         <h3>Explicit types</h3>
-        <p><code class="inline">i8</code> → <code class="inline">i128</code>, <code class="inline">u8</code> → <code class="inline">u128</code>, <code class="inline">f32/f64/f128</code>, <code class="inline">str</code>, slices, optionals, error unions, and generics.</p>
+        <p><code class="inline">i8</code> → <code class="inline">i128</code>, <code class="inline">u8</code> → <code class="inline">u128</code>, <code class="inline">f32/f64/f128</code>, <code class="inline">str</code>, slices, optionals, and generics.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></div>
         <h3>Concise syntax</h3>
-        <p><code class="inline">if</code>, <code class="inline">while</code>, <code class="inline">switch</code>, and <code class="inline">for</code> without parentheses. <code class="inline">|i|</code> capture bindings. <code class="inline">orelse</code>, <code class="inline">catch</code>, and <code class="inline">?</code> for safe unwraps.</p>
+        <p><code class="inline">if</code>, <code class="inline">while</code>, <code class="inline">switch</code>, and <code class="inline">for</code> without parentheses. <code class="inline">|i|</code> capture bindings. <code class="inline">orelse</code> and <code class="inline">?</code> for safe unwraps.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg></div>
@@ -147,13 +183,13 @@ fn main() void {
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
-        <h3>Standard library</h3>
-        <p><code class="inline">std.io</code>, <code class="inline">std.math</code> (inf, nan, and other constants), and <code class="inline">std.collections</code> with <code class="inline">vec:T</code>, <code class="inline">map:(K,V)</code>, <code class="inline">set:T</code>, and <code class="inline">hstr</code>.</p>
+        <h3>Modules &amp; C interop</h3>
+        <p><code class="inline">#import</code> with <code class="inline">pub</code> visibility, real C headers via <code class="inline">#importc</code>, and hand-declared <code class="inline">extern "C" fn</code>.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M6 9v6M20 6l-11 2v8l11 2V6Z"/></svg></div>
         <h3>Built in the open</h3>
-        <p>Developed in public on GitHub. The syntax, compiler, and docs are public from day one, and early contributors are welcome.</p>
+        <p>v0.1.0 is out and installable. Developed in public on GitHub; syntax, compiler, and docs are public from day one, and contributors are welcome.</p>
       </div>
     </div>
   </div>
@@ -169,7 +205,7 @@ fn main() void {
         <p class="muted">
           A <code class="inline">struct</code> with methods, a generic <code class="inline">Pair:T</code>,
           and a range <code class="inline">for</code>. Each construct is small, and all of it
-          compiles to plain C99.
+          transpiles to plain C11.
         </p>
         <ul class="note-list">
           <li>Methods take <code class="inline">self ^Point</code>. Mutation is explicit, never hidden.</li>
@@ -228,7 +264,7 @@ fn main() void {
     <div class="section-head center reveal">
       <span class="eyebrow center">Type system</span>
       <h2>Types you can trust.</h2>
-      <p class="lead">Fixed-width integers, floats, strings, slices, optionals, error unions, and heap collections. Sizes and layouts are explicit.</p>
+      <p class="lead">Fixed-width integers, floats, strings, slices, optionals, and heap collections. Sizes and layouts are explicit.</p>
     </div>
     <div class="type-grid reveal">
       <div class="type-chip"><code>i8 … i128</code><span>signed integers</span></div>
@@ -239,7 +275,7 @@ fn main() void {
       <div class="type-chip"><code>[N]T · []T</code><span>arrays · slices</span></div>
       <div class="type-chip"><code>^T</code><span>pointers</span></div>
       <div class="type-chip"><code>?T</code><span>optionals</span></div>
-      <div class="type-chip"><code>!T · E!T</code><span>error unions</span></div>
+      <div class="type-chip"><code>!T · E!T</code><span>error unions — planned</span></div>
       <div class="type-chip"><code>vec:T</code><span>dynamic arrays</span></div>
       <div class="type-chip"><code>map:(K,V)</code><span>hash maps</span></div>
       <div class="type-chip"><code>set:T</code><span>hash sets</span></div>
@@ -268,16 +304,61 @@ fn main() void {
       <a class="toc-card reveal" href="docs.html#types">
         <code>i32, str, ?T, !T</code><span>the type system</span>
       </a>
+      <a class="toc-card reveal" href="docs.html#optionals">
+        <code>?T · orelse · x?</code><span>safe unwraps</span>
+      </a>
       <a class="toc-card reveal" href="docs.html#structs">
         <code>struct Point</code><span>structs &amp; methods</span>
       </a>
       <a class="toc-card reveal" href="docs.html#enums">
         <code>enum Direction</code><span>enums &amp; unions</span>
       </a>
-      <a class="toc-card reveal" href="docs.html#control-flow">
+      <a class="toc-card reveal" href="docs.html#switch">
         <code>if / switch / for</code><span>control flow</span>
       </a>
+      <a class="toc-card reveal" href="docs.html#modules">
+        <code>#import · module</code><span>modules &amp; C interop</span>
+      </a>
     </div>
+  </div>
+</section>
+
+<!-- ============ LANGUAGE SUPPORT ============ -->
+<section class="section section-tight" id="support">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow center">Language support</span>
+      <h2>What works end-to-end today.</h2>
+      <p class="lead">The compiler ships a feature at a time. This table tracks what the current release supports, straight from the repository.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="docs-table support-table">
+        <thead>
+          <tr><th>Feature</th><th>Status</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>var</code> / <code>const</code> (incl. <code>static</code>)</td><td><span class="pill done">Shipped</span></td><td>Explicit or inferred types; const-mutability enforced</td></tr>
+          <tr><td><code>fn</code> functions</td><td><span class="pill done">Shipped</span></td><td>Forward calls, argument/return type checking, missing-return checks</td></tr>
+          <tr><td><code>struct</code> + methods</td><td><span class="pill done">Shipped</span></td><td>Fields, struct literals, instance/static methods, by-value copy</td></tr>
+          <tr><td><code>enum</code> + methods</td><td><span class="pill done">Shipped</span></td><td>Fieldless variants and tagged unions with payloads; exhaustive <code>switch</code></td></tr>
+          <tr><td><code>switch</code></td><td><span class="pill done">Shipped</span></td><td>Enum variants, integer/char literals, <code>_</code> default, pattern binding</td></tr>
+          <tr><td>Pointers</td><td><span class="pill done">Shipped</span></td><td><code>^T</code>, <code>&amp;x</code>, <code>x^</code>, <code>self^.x</code> → <code>self-&gt;x</code></td></tr>
+          <tr><td>Control flow</td><td><span class="pill done">Shipped</span></td><td><code>if</code> / <code>else</code>, <code>while</code>, <code>for 0..10 |i|</code>, <code>break</code>, <code>continue</code></td></tr>
+          <tr><td>Literals &amp; operators</td><td><span class="pill done">Shipped</span></td><td>All bases, <code>_</code> separators, arithmetic/comparison/logical/bitwise; content-based <code>str ==</code>/<code>!=</code></td></tr>
+          <tr><td>C interop</td><td><span class="pill done">Shipped</span></td><td><code>#importc "header.h"</code> and <code>extern "C" fn</code></td></tr>
+          <tr><td>Modules &amp; <code>#import</code></td><td><span class="pill done">Shipped</span></td><td><code>module</code> keyword, <code>pub</code> visibility, all import forms, cycle detection, merged C output</td></tr>
+          <tr><td>Generics</td><td><span class="pill done">Shipped</span></td><td><code>fn foo:T</code>, <code>struct Pair:T</code>, <code>alias Opt:T = ?T;</code> — monomorphized per type-argument set</td></tr>
+          <tr><td><code>union</code> + methods</td><td><span class="pill done">Shipped</span></td><td>C-style shared-memory fields, instance/static methods, generic unions</td></tr>
+          <tr><td>Arrays / slices</td><td><span class="pill done">Shipped</span></td><td><code>[N]T</code>, <code>[_]T</code>, <code>[]T</code>, <code>[N:x]T</code> sentinel arrays, implicit array → slice</td></tr>
+          <tr><td>Optionals</td><td><span class="pill done">Shipped</span></td><td><code>?T</code>, <code>null</code>, <code>orelse</code>, <code>x?</code>, <code>== null</code> / <code>!= null</code></td></tr>
+          <tr><td>Error unions</td><td><span class="pill next">Planned</span></td><td><code>!T</code>, <code>catch</code> — on the roadmap</td></tr>
+          <tr><td>Standard library (<code>std.io</code>, …)</td><td><span class="pill next">Planned</span></td><td>User modules are in; the std library ships when the language matures</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="center muted reveal" style="margin-top:24px">
+      Full details in the <a href="docs.html">language reference</a> and the <a href="changelog.html">changelog</a>.
+    </p>
   </div>
 </section>
 
@@ -287,34 +368,34 @@ fn main() void {
     <div class="split">
       <div class="reveal">
         <span class="eyebrow">Status</span>
-        <h2 style="font-size:clamp(1.8rem,3.4vw,2.5rem)">Development status</h2>
+        <h2 style="font-size:clamp(1.8rem,3.4vw,2.5rem)">v0.1.0 is released.</h2>
         <p class="muted">
-          Tinoc is under active development. The compiler, syntax, and tooling are built
-          in public. There is nothing to install yet, but you can follow the work,
-          run the tests, and contribute.
+          The first public release shipped on August 5, 2026. Prebuilt binaries for
+          macOS, Linux, and Windows are available through the installers, and the
+          compiler, syntax, and tooling keep evolving in public.
         </p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
-          <a class="btn btn-ghost" href="https://github.com/tinoc-lang/tinoc" target="_blank" rel="noopener">Follow development</a>
-          <a class="btn btn-ghost" href="install.html">See install status</a>
+          <a class="btn btn-primary" href="install.html">Install Tinoc</a>
+          <a class="btn btn-ghost" href="changelog.html">Read the changelog</a>
         </div>
       </div>
       <div class="reveal">
         <ol class="steps">
           <li>
             <h3>Compiler core</h3>
-            <p>Lexing, parsing, semantic analysis, and C99 emission.</p>
+            <p>Lexing, parsing, semantic analysis, and C11 emission — done and released.</p>
           </li>
           <li>
-            <h3>Syntax &amp; docs</h3>
-            <p>The language reference on this site tracks the compiler feature by feature.</p>
+            <h3>Language features</h3>
+            <p>Modules, generics, optionals, arrays, slices, enums, and unions ship in v0.1.0.</p>
           </li>
           <li>
-            <h3>Tooling</h3>
-            <p>A <code class="inline">tinoc</code> CLI: build, run, and transpile <code class="inline">.tnc</code> projects.</p>
+            <h3>Releases &amp; installers</h3>
+            <p>v0.1.0 binaries for macOS, Linux, and Windows; package-manager installs come later.</p>
           </li>
           <li>
-            <h3>Releases</h3>
-            <p>Prebuilt binaries and package-manager installs land once the compiler stabilizes.</p>
+            <h3>On the roadmap</h3>
+            <p>Error unions (<code class="inline">!T</code> / <code class="inline">catch</code>) and the standard library (<code class="inline">std.io</code>, <code class="inline">std.math</code>, <code class="inline">std.collections</code>).</p>
           </li>
         </ol>
       </div>
@@ -353,7 +434,7 @@ fn main() void {
           </svg>
           <span class="brand-word">Tinoc</span>
         </a>
-        <p>A modern systems programming language that transpiles to C99. Meaningful, Accurate, Robust, Maximum Performance, Simple.</p>
+        <p>A modern systems programming language that transpiles to C11. Meaningful, Accurate, Robust, Maximum Performance, Simple.</p>
       </div>
       <div class="footer-col">
         <h4>Language</h4>
@@ -368,6 +449,7 @@ fn main() void {
         <h4>Project</h4>
         <ul>
           <li><a href="install.html">Install</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
           <li><a href="https://github.com/tinoc-lang/tinoc" target="_blank" rel="noopener">Source code</a></li>
           <li><a href="https://github.com/tinoc-lang/tinoc/issues" target="_blank" rel="noopener">Issues</a></li>
           <li><a href="https://github.com/pbarot2009" target="_blank" rel="noopener">Creator</a></li>
@@ -384,7 +466,7 @@ fn main() void {
     </div>
     <div class="footer-bottom">
       <span>© <span data-year>2026</span> The Tinoc contributors · Apache-2.0</span>
-      <span>Tinoc — This Is Not C. Made with <span class="heart">♥</span> and C99.</span>
+      <span>Tinoc — This Is Not C. Made with <span class="heart">♥</span> and C11.</span>
     </div>
   </div>
 </footer>

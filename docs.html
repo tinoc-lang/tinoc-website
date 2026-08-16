@@ -4,7 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tinoc — Language Reference</title>
-<meta name="description" content="The Tinoc language reference: variables, constants, literals, operators, functions, types, structs, enums, unions, control flow, modules, and the preprocessor.">
+<meta name="description" content="The Tinoc language reference: variables, constants, literals, operators, functions, types, optionals, structs, enums, unions, arrays, control flow, modules, C interop, and the preprocessor.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="The Tinoc contributors">
+<meta name="theme-color" content="#0a0e0d">
+<link rel="canonical" href="https://tinoc-lang.vercel.app/docs.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tinoc — This Is Not C">
+<meta property="og:title" content="Tinoc — Language Reference">
+<meta property="og:description" content="The Tinoc language reference: variables, literals, operators, functions, types, optionals, structs, enums, unions, arrays, control flow, modules, C interop, and the preprocessor.">
+<meta property="og:url" content="https://tinoc-lang.vercel.app/docs.html">
+<meta property="og:image" content="https://tinoc-lang.vercel.app/logo-mint.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tinoc — Language Reference">
+<meta name="twitter:description" content="The Tinoc language reference: variables, literals, operators, functions, types, optionals, structs, enums, unions, arrays, control flow, modules, C interop, and the preprocessor.">
+<meta name="twitter:image" content="https://tinoc-lang.vercel.app/logo-mint.jpg">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d2b26'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' font-weight='700' text-anchor='middle' fill='%235eead4'%3ET%3C/text%3E%3C/svg%3E">
 
@@ -13,6 +29,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&family=Google+Sans+Code:wght@400..700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Tinoc — Language Reference",
+  "description": "The Tinoc language reference: variables, literals, operators, functions, types, optionals, structs, enums, unions, arrays, control flow, modules, C interop, and the preprocessor.",
+  "url": "https://tinoc-lang.vercel.app/docs.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Tinoc — This Is Not C",
+    "url": "https://tinoc-lang.vercel.app/"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -29,6 +61,7 @@
     <ul class="nav-links">
       <li><a class="nav-link active" href="docs.html" aria-current="page">Docs</a></li>
       <li><a class="nav-link" href="install.html">Install</a></li>
+      <li><a class="nav-link" href="changelog.html">Changelog</a></li>
       <li><a class="nav-link" href="community.html">Community</a></li>
       <li class="nav-menu-cta">
         <a class="btn btn-primary" href="install.html">Get Tinoc</a>
@@ -63,6 +96,7 @@
             <h4>Basics</h4>
             <ul class="docs-nav">
               <li><a href="#intro">Getting started</a></li>
+              <li><a href="#support">Language support</a></li>
               <li><a href="#variables">Variables</a></li>
               <li><a href="#constants">Constants</a></li>
             </ul>
@@ -80,6 +114,8 @@
             <ul class="docs-nav">
               <li><a href="#functions">Functions</a></li>
               <li><a href="#types">Types</a></li>
+              <li><a href="#optionals">Optionals</a></li>
+              <li><a href="#error-unions">Error unions</a></li>
             </ul>
           </div>
           <div class="docs-nav-group">
@@ -88,7 +124,7 @@
               <li><a href="#structs">Structs</a></li>
               <li><a href="#enums">Enums</a></li>
               <li><a href="#unions">Unions</a></li>
-              <li><a href="#arrays">Arrays</a></li>
+              <li><a href="#arrays">Arrays &amp; slices</a></li>
             </ul>
           </div>
           <div class="docs-nav-group">
@@ -101,10 +137,11 @@
             </ul>
           </div>
           <div class="docs-nav-group">
-            <h4>Modules</h4>
+            <h4>Modules &amp; C</h4>
             <ul class="docs-nav">
               <li><a href="#modules">Modules</a></li>
               <li><a href="#preprocessor">Preprocessor</a></li>
+              <li><a href="#c-interop">C interop</a></li>
             </ul>
           </div>
         </nav>
@@ -116,8 +153,9 @@
 
       <article id="intro">
         <h2>Getting started</h2>
-        <p class="lead">Tinoc is a systems programming language that <strong>compiles to C99</strong>. Write <code class="inline">.tnc</code> source, emit portable C, and build it with any C99 toolchain.</p>
-        <p>The compiler is under active development, so there is nothing to install yet. These docs describe the language as it is being built and track the repository.</p>
+        <p class="lead">Tinoc is a systems programming language that <strong>transpiles to C11</strong>. Write <code class="inline">.tnc</code> source, emit portable C, and build it with any C11 toolchain.</p>
+        <p>Tinoc respects C and its usage. It is built on the philosophy that programming should be <strong>Meaningful</strong>, <strong>Accurate</strong>, <strong>Robust</strong>, <strong>Maximum Performance</strong>, and <strong>Simple</strong> — C11 unlocks features like <code class="inline">_Generic</code> dispatch in the <code class="inline">tinoc.h</code> runtime (saturating arithmetic) and gives the compiler room to grow (error unions, typed enums, generics) without fighting the target language.</p>
+        <p>v0.1.0 is out. Install the latest release binary into <code class="inline">~/.tinoc</code> — no root needed — with the one-line installers on the <a href="install.html">install page</a>.</p>
 
         <h3>Hello, world</h3>
         <div class="code-block">
@@ -134,7 +172,7 @@ fn main() void {
         </div>
 
         <h3>What the compiler emits</h3>
-        <p><code class="inline">main.tnc</code> compiles to readable C99 with a small runtime header. <code class="inline">str</code> becomes a plain struct, and <code class="inline">io.println</code> becomes <code class="inline">printf</code>.</p>
+        <p><code class="inline">main.tnc</code> transpiles to readable C11 with a small runtime header. <code class="inline">str</code> becomes a plain struct, and <code class="inline">io.println</code> becomes <code class="inline">printf</code>.</p>
         <div class="code-block">
           <div class="code-block-head"><span>main.c — emitted</span></div>
           <pre><code class="lang-c">#include &lt;stdio.h&gt;
@@ -148,6 +186,37 @@ int main() {
 }</code></pre>
         </div>
         <p>The pipeline is <code class="inline">tinoc build main.tnc</code>, and <code class="inline">main.c</code> goes to your C compiler. There is no runtime, VM, or garbage collector.</p>
+      </article>
+
+      <article id="support">
+        <h2>Language support</h2>
+        <p>What the compiler supports end-to-end in the current release:</p>
+        <div class="table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr><th>Feature</th><th>Status</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>var</code> / <code>const</code> (incl. <code>static</code>)</td><td><span class="pill done">Shipped</span></td><td>Explicit or inferred types; const-mutability enforced</td></tr>
+              <tr><td><code>fn</code> functions</td><td><span class="pill done">Shipped</span></td><td>Forward calls, argument/return type checking, missing-return checks</td></tr>
+              <tr><td><code>struct</code> + methods</td><td><span class="pill done">Shipped</span></td><td>Fields, struct literals, instance/static methods, by-value copy/params/returns</td></tr>
+              <tr><td><code>enum</code> + methods</td><td><span class="pill done">Shipped</span></td><td>Fieldless variants and tagged unions with payloads; exhaustive <code>switch</code> with pattern binding</td></tr>
+              <tr><td><code>switch</code></td><td><span class="pill done">Shipped</span></td><td>Enum variants (exhaustive, no <code>_</code> needed), integer/char literals, <code>_</code> default arm; pattern-binding arms</td></tr>
+              <tr><td>Pointers</td><td><span class="pill done">Shipped</span></td><td><code>^T</code>, <code>&amp;x</code>, <code>x^</code>, pointers to structs/enums/unions, <code>self^.x</code> → <code>self-&gt;x</code></td></tr>
+              <tr><td>Control flow</td><td><span class="pill done">Shipped</span></td><td><code>if</code> / <code>else if</code> / <code>else</code>, <code>while</code>, <code>for 0..10 |i|</code>, <code>break</code>, <code>continue</code></td></tr>
+              <tr><td>Literals &amp; operators</td><td><span class="pill done">Shipped</span></td><td>Integer (all bases, <code>_</code> separators), float, string, char, bool; arithmetic/comparison/logical/bitwise; content-based <code>str ==</code>/<code>!=</code></td></tr>
+              <tr><td>C interop</td><td><span class="pill done">Shipped</span></td><td><code>#importc "header.h" as alias;</code> (clang/gcc parsing) and <code>extern "C" fn</code> declarations</td></tr>
+              <tr><td>Modules &amp; <code>#import</code></td><td><span class="pill done">Shipped</span></td><td><code>module</code> keyword, <code>pub</code> visibility, all import forms, import caching + cycle detection, single merged C output with mangled names</td></tr>
+              <tr><td>Generic functions / structs / aliases</td><td><span class="pill done">Shipped</span></td><td><code>fn foo:T</code>, <code>struct Pair:T</code>, <code>alias Opt:T = ?T;</code> — monomorphized per concrete type-argument set, across module boundaries</td></tr>
+              <tr><td><code>union</code> + methods</td><td><span class="pill done">Shipped</span></td><td>C-style shared-memory fields, instance/static methods, generic unions</td></tr>
+              <tr><td>Arrays / slices</td><td><span class="pill done">Shipped</span></td><td><code>[N]T</code>, <code>[_]T</code>, <code>[]T</code>, <code>[N:x]T</code> sentinel arrays, array literals, indexing, <code>.len</code>, <code>for coll |x|</code>, implicit array → slice</td></tr>
+              <tr><td>Optionals</td><td><span class="pill done">Shipped</span></td><td><code>?T</code>, <code>null</code>, <code>orelse</code>, <code>x?</code>, <code>== null</code> / <code>!= null</code>; plain values auto-wrap where a <code>?T</code> is expected</td></tr>
+              <tr><td>Error unions</td><td><span class="pill next">Planned</span></td><td><code>!T</code>, <code>catch</code> — planned</td></tr>
+              <tr><td>Standard library (<code>std.io</code>, …)</td><td><span class="pill next">Planned</span></td><td>User modules are in; the std library ships when the language matures</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>See the <a href="changelog.html">changelog</a> for what landed in each version.</p>
       </article>
 
       <article id="variables">
@@ -239,7 +308,7 @@ const lightspeed = 299_792_458.000_000;
 const nanosecond = 0.000_000_001;
 const more_hex = 0x1234_5678.9ABC_CDEFp-10;</code></pre>
         </div>
-        <p>Tinoc has no syntax for NaN, infinity, or negative infinity. Use <code class="inline">std.math</code> for these values.</p>
+        <p>Tinoc has no special syntax for NaN, infinity, or negative infinity. Use <code class="inline">std.math</code> for these values.</p>
         <div class="code-block">
           <div class="code-block-head"><span>math.tnc</span></div>
           <pre><code class="lang-tnc">#import std.math;
@@ -279,9 +348,9 @@ const nan = math.nan();</code></pre>
               <tr><td>Bitwise Or</td><td><code>a | b</code> · <code>a |= b</code></td><td>Bitwise OR</td></tr>
               <tr><td>Bitwise Xor</td><td><code>a ^ b</code> · <code>a ^= b</code></td><td>Bitwise XOR</td></tr>
               <tr><td>Bitwise Not</td><td><code>~a</code></td><td>Bitwise complement</td></tr>
-              <tr><td>Defaulting Optional Unwrap</td><td><code>a orelse b</code></td><td>Use <code>b</code> when <code>a</code> is null</td></tr>
-              <tr><td>Optional Unwrap</td><td><code>a?</code></td><td>Unwrap, else compile error</td></tr>
-              <tr><td>Defaulting Error Unwrap</td><td><code>a catch b</code> · <code>a catch |err| b</code></td><td>Handle errors with a default</td></tr>
+              <tr><td>Defaulting Optional Unwrap</td><td><code>a orelse b</code></td><td>Use <code>b</code> when <code>a</code> is null; result type is <code>T</code></td></tr>
+              <tr><td>Optional Unwrap</td><td><code>a?</code></td><td>Read the payload — check <code>a != null</code> first</td></tr>
+              <tr><td>Defaulting Error Unwrap</td><td><code>a catch b</code> · <code>a catch |err| b</code></td><td>Handle errors with a default — planned</td></tr>
               <tr><td>Logical And</td><td><code>a and b</code></td><td>Short-circuit AND</td></tr>
               <tr><td>Logical Or</td><td><code>a or b</code></td><td>Short-circuit OR</td></tr>
               <tr><td>Logical Not</td><td><code>!a</code></td><td>Negate a boolean</td></tr>
@@ -293,9 +362,10 @@ const nan = math.nan();</code></pre>
               <tr><td>Greater or Equal</td><td><code>a &gt;= b</code></td><td>Ordering</td></tr>
               <tr><td>Less Than</td><td><code>a &lt; b</code></td><td>Ordering</td></tr>
               <tr><td>Lesser or Equal</td><td><code>a &lt;= b</code></td><td>Ordering</td></tr>
+              <tr><td>Array Multiplication</td><td><code>a ** b</code></td><td>Array repetition</td></tr>
               <tr><td>Pointer Dereference</td><td><code>a^</code></td><td>Read through a pointer</td></tr>
               <tr><td>Address Of</td><td><code>&amp;a</code></td><td>Take a pointer</td></tr>
-              <tr><td>Error Set Merge</td><td><code>a || b</code></td><td>Merge error sets</td></tr>
+              <tr><td>Error Set Merge</td><td><code>a || b</code></td><td>Merge error sets — planned</td></tr>
             </tbody>
           </table>
         </div>
@@ -303,8 +373,7 @@ const nan = math.nan();</code></pre>
         <h3>Precedence</h3>
         <p>From highest to lowest binding:</p>
         <div class="syntax-box">x() x[] x.y x^ x? a!b x{} !x -x -%x ~x &amp;x ?x * / % ** *% *| || + - ++ +% -% +| -|
-&lt;&lt; &gt;&gt; &lt;&lt;| &amp; ^ | orelse catch == != &lt; &gt; &lt;= &gt;= and or = *= *%= *|= /= %= +=
-+%= +|= -= -%= -|= &lt;&lt;= &lt;&lt;|= &gt;&gt;= &amp;= ^= |=</div>
+&lt;&lt; &gt;&gt; &lt;&lt;| &amp; ^ | orelse catch == != &lt; &gt; &lt;= &gt;= and or = *= *%= *|= /= %= += +%= +|= -= -%= -|= &lt;&lt;= &lt;&lt;|= &gt;&gt;= &amp;= ^= |=</div>
       </article>
 
       <article id="functions">
@@ -431,18 +500,18 @@ fn main() void {
         </div>
 
         <h3>Optional</h3>
-        <p>An optional is a nullable wrapper, not a raw pointer:</p>
+        <p>An optional is a nullable wrapper, not a raw pointer. The compiler emits one named typedef per optional type used (<code>?i32</code> → <code>tnc_opt_i32</code>), so every declaration of the same optional type shares one C struct type:</p>
         <div class="table-wrap">
           <table class="docs-table">
             <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
             <tbody>
-              <tr><td><code>?T</code></td><td><code>struct { T value; bool has_value; }</code></td><td>Optional</td></tr>
+              <tr><td><code>?T</code></td><td><code>struct { T value; bool has_value; }</code></td><td>Optional (nullable wrapper)</td></tr>
             </tbody>
           </table>
         </div>
 
         <h3>Error unions</h3>
-        <p>Errors are first-class values. A result carries the value or the error:</p>
+        <p class="muted"><span class="pill next">Planned</span> Errors will be first-class values. A result carries the value or the error. The representation is documented here ahead of implementation:</p>
         <div class="table-wrap">
           <table class="docs-table">
             <thead><tr><th>Tinoc</th><th>C equivalent</th><th>Category</th></tr></thead>
@@ -478,6 +547,67 @@ fn main() void {
             </tbody>
           </table>
         </div>
+      </article>
+
+      <article id="optionals">
+        <h2>Optionals</h2>
+        <p>An optional wraps a payload of type <code class="inline">T</code> with a <code class="inline">has_value</code> flag: a <code class="inline">?T</code> is either empty (<code class="inline">null</code>) or holds a <code class="inline">T</code>.</p>
+        <h3>Syntax</h3>
+        <div class="syntax-box">var maybe ?i32 = 42;   // wrap a payload
+var none  ?i32 = null; // the empty optional
+
+maybe orelse 0   // payload when some, else the fallback (result type is T)
+maybe?           // unwrap: the payload (only after a != null check)
+maybe == null    // presence checks
+maybe != null</div>
+        <h3>Example</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>optionals.tnc</span></div>
+          <pre><code class="lang-tnc">fn index_of(hay []i32, needle i32) ?i32 {
+    var i i32 = 0;
+    while i &lt; hay.len {
+        if hay[i] == needle {
+            return i; // plain i32 auto-wraps into ?i32
+        }
+        i += 1;
+    }
+    return null;
+}
+
+fn main() void {
+    var maybe ?i32 = 42;
+    var none  ?i32 = null;
+
+    if none == null {
+        var v = maybe orelse 0; // 42 — v is an i32
+        var u = maybe?;         // 42
+    }
+    var nums [4]i32 = [10, 20, 30, 40];
+    var s []i32 = nums;
+    var d = index_of(s, 99) orelse -1; // -1
+}</code></pre>
+        </div>
+        <ul class="note-list">
+          <li>A plain <code class="inline">T</code> value — or <code class="inline">null</code> — auto-wraps into a <code class="inline">?T</code> wherever one is expected: initializers, call arguments, return values, and assignments. Untyped numeric literals adapt to the payload type (<code class="inline">var x ?f64 = 5;</code>).</li>
+          <li><code class="inline">orelse</code> short-circuits: the fallback is only evaluated when the optional is <code class="inline">null</code>. Its result type is the payload type <code class="inline">T</code>.</li>
+          <li><code class="inline">maybe?</code> reads the payload; unwrapping an empty optional reads the wrapped <code class="inline">value</code> field (garbage, not a crash) — always check <code class="inline">maybe != null</code> first.</li>
+          <li>Comparing an optional with anything but <code class="inline">null</code> is rejected — use <code class="inline">== null</code> / <code class="inline">!= null</code>. <code class="inline">orelse</code> requires an optional on the left and <code class="inline">?</code> unwrap requires an optional. Optionals of arrays or <code class="inline">void</code> are rejected (use <code class="inline">?[]T</code> for a nullable collection view).</li>
+        </ul>
+      </article>
+
+      <article id="error-unions">
+        <h2>Error unions</h2>
+        <p class="muted"><span class="pill next">Planned</span> Error unions (<code class="inline">!T</code>, <code class="inline">catch</code>) are next on the roadmap. User modules are in today; the standard library ships when the language matures.</p>
+        <p>When they land, a result will carry either the value or the error, handled with <code class="inline">a catch b</code> or <code class="inline">a catch |err| b</code>. The planned C representation is a tagged struct:</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>result_T — planned representation</span></div>
+          <pre><code class="lang-c">typedef struct {
+    T value;
+    E err;      // error code/enum
+    bool is_err;
+} result_T;</code></pre>
+        </div>
+        <p>Track progress in the <a href="https://github.com/tinoc-lang/tinoc/issues" target="_blank" rel="noopener">issue tracker</a>.</p>
       </article>
 
       <article id="structs">
@@ -587,6 +717,11 @@ fn main() void {
     var a f32 = s.area();
 }</code></pre>
         </div>
+        <ul class="note-list">
+          <li>Fieldless variants compile to plain C enums; variants with payloads become tagged unions (tag + per-variant anonymous struct), so multi-field payloads never overlap.</li>
+          <li><code class="inline">switch</code> over an enum is exhaustive — list every variant and no <code class="inline">_</code> arm is needed; pattern binding (<code class="inline">Shape.Rect(w, h) =&gt;</code>) binds payload fields directly.</li>
+          <li>Enums support instance methods (<code class="inline">self ^Name</code>), static methods, equality, and being passed/returned like any other type.</li>
+        </ul>
       </article>
 
       <article id="unions">
@@ -633,20 +768,69 @@ fn main() void {
     // d.as_float now reads the same memory as f32
 }</code></pre>
         </div>
+        <ul class="note-list">
+          <li>C-style shared memory: writing <code class="inline">as_int</code> and reading <code class="inline">as_float</code> reinterprets the same bytes — IEEE-754 punning works end-to-end.</li>
+          <li>Unions reuse struct field syntax and support instance methods (<code class="inline">self ^Name</code>) and static methods.</li>
+          <li>Comparisons and arithmetic on unions are rejected with clear diagnostics.</li>
+        </ul>
       </article>
 
       <article id="arrays">
-        <h2>Arrays</h2>
-        <h3>Array literals</h3>
+        <h2>Arrays &amp; slices</h2>
+        <p>An <strong>array</strong> is a fixed-size, contiguous sequence of elements of type <code class="inline">T</code>. Its length is part of the type and known at compile time.</p>
+        <h3>Syntax</h3>
+        <div class="syntax-box">[&lt;length&gt;]&lt;T&gt;             // fixed-size array, e.g. [5]u8
+[_]&lt;T&gt;                 // size inferred from the initializer, e.g. [_]f32
+[&lt;length&gt;:&lt;sentinel&gt;]&lt;T&gt;  // sentinel-terminated array, e.g. [_:0]u8
+
+[&lt;elem&gt;, &lt;elem&gt;, …]    // array literal; element type is inferred</div>
+        <h3>Example</h3>
         <div class="code-block">
           <div class="code-block-head"><span>arrays.tnc</span></div>
-          <pre><code class="lang-tnc">// array literal
+          <pre><code class="lang-tnc">// array literal with inferred element type
 const message = ['h', 'e', 'l', 'l', 'o'];
 
 // alternative initialization using a result location
-const alt_message [5]u8 = ['h', 'e', 'l', 'l', 'o'];</code></pre>
+const alt_message [5]u8 = ['h', 'e', 'l', 'l', 'o'];
+
+// explicit element type, size inferred from the literal
+var floats [_]f32 = [1.5, 2.5, 3.5];
+
+// element access and assignment
+if message[0] != 'h' { ... }
+message[4] = 'x';
+
+// .len is the element count (compile-time constant for arrays)
+if message.len != 5 { ... }
+
+// iterate over the elements
+var total i32 = 0;
+for message |ch| {
+    total += ch;
+}</code></pre>
         </div>
+
+        <h3>Slices</h3>
+        <p>A <strong>slice</strong> <code class="inline">[]T</code> is a fat pointer — a <code class="inline">{ ptr: ^T, len: usize }</code> pair that views a contiguous region of memory, typically an array.</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>slices.tnc</span></div>
+          <pre><code class="lang-tnc">var nums [5]i32 = [1, 2, 3, 4, 5];
+var s []i32 = nums;   // array converts implicitly to a slice view
+
+if s.len != 5 { ... } // runtime length
+s[2] = 30;            // writes through to the backing array
+
+fn total(s []i32) i32 { ... }  // functions take slices, not arrays</code></pre>
+        </div>
+        <ul class="note-list">
+          <li>Arrays convert implicitly to slices at call sites and in assignments; the slice aliases the array's storage.</li>
+          <li>Functions cannot take or return array values — the compiler rejects them and points you to slices: <code class="inline">array parameter a is not supported ([3]i32) — use a slice ([]i32) instead</code>.</li>
+          <li>Assigning a whole array is rejected for the same reason; copy element-wise instead. Iterate with the collection form: <code class="inline">for s |v| { ... }</code>.</li>
+          <li>Slice types are emitted as named typedefs (<code class="inline">tnc_slice_i32</code>) so prototypes and definitions share one C type.</li>
+        </ul>
+
         <h3>Multidimensional arrays</h3>
+        <p>Nested <code class="inline">[N]T</code> types build row-major matrices: <code class="inline">[4][5]f32</code> is 4 rows of 5 <code class="inline">f32</code>. A row (<code class="inline">mat[i]</code>) is itself an array, so iterate row-by-row:</p>
         <div class="code-block">
           <div class="code-block-head"><span>matrix.tnc</span></div>
           <pre><code class="lang-tnc">const mat4x5 [4][5]f32 = [
@@ -654,10 +838,24 @@ const alt_message [5]u8 = ['h', 'e', 'l', 'l', 'o'];</code></pre>
     [0.0, 1.0, 0.0, 1.0, 0.0],
     [0.0, 0.0, 1.0, 0.0, 0.0],
     [0.0, 0.0, 0.0, 1.0, 9.9],
-];</code></pre>
+];
+
+if mat4x5[2][3] != 0.0 { ... }
+
+var total f32 = 0.0;
+for 0..mat4x5.len |i| {
+    for mat4x5[i] |cell| {
+        total += cell;
+    }
+}</code></pre>
         </div>
+        <ul class="note-list">
+          <li><code class="inline">.len</code> on a multidimensional array is the number of rows.</li>
+          <li>The compiler rejects iterating a multidimensional array directly (its element is itself an array) — iterate a row instead.</li>
+        </ul>
+
         <h3>Sentinel-terminated arrays</h3>
-        <p>The syntax <code class="inline">[N:x]T</code> describes an array with a sentinel element of value <code class="inline">x</code> at the index corresponding to length <code class="inline">N</code>.</p>
+        <p>The syntax <code class="inline">[N:x]T</code> describes an array with a sentinel element of value <code class="inline">x</code> at the index corresponding to length <code class="inline">N</code>. <code class="inline">[N:x]T</code> stores <code class="inline">N + 1</code> elements (the sentinel sits at index <code class="inline">N</code>), matching C string conventions.</p>
         <div class="code-block">
           <div class="code-block-head"><span>sentinel.tnc</span></div>
           <pre><code class="lang-tnc">#import std.testing.expectEqual;
@@ -718,6 +916,7 @@ fn main() void {
           <li><code class="inline">_</code> is the default case.</li>
           <li>No fallthrough; each arm is independent.</li>
           <li>Braces are required per arm.</li>
+          <li>Enum switches are exhaustive: list every variant and no <code class="inline">_</code> arm is needed. Tagged-union payloads bind with patterns — <code class="inline">Shape.Rect(w, h) =&gt; { ... }</code>.</li>
         </ul>
       </article>
 
@@ -839,39 +1038,90 @@ while true { … }              // infinite loop</div>
 
       <article id="modules">
         <h2>Modules</h2>
-        <p><code class="inline">#import</code> resolves modules at compile time, not by text insertion like <code class="inline">#include</code>.</p>
-        <h3>Syntax</h3>
-        <div class="syntax-box">#import &lt;module.path&gt;;          // import a specific module
-#import &lt;module.path&gt;.*;        // import all public exports</div>
+        <p><code class="inline">#import</code> resolves modules semantically, replacing C <code class="inline">#include</code>: modules are parsed and type-checked once, only <code class="inline">pub</code> exports are visible to importers, and every loaded module compiles into a single merged C translation unit — no text insertion, no header guards.</p>
+
+        <h3>The <code class="inline">module</code> keyword</h3>
+        <p><code class="inline">module name;</code> names the file's module. A file without a declaration gets its module name from its file stem (<code class="inline">vec.tnc</code> → module <code class="inline">vec</code>), and convention files <code class="inline">mod.tnc</code> / <code class="inline">index.tnc</code> take their containing directory's name (<code class="inline">shapes/mod.tnc</code> → module <code class="inline">shapes</code>) — <strong>directories become modules automatically</strong>.</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>math.tnc</span></div>
+          <pre><code class="lang-tnc">module math;   // this file is the module `math`; importers say: #import math;
+
+pub const PI f64 = 3.14159;
+const TAU f64 = 6.28318;   // private: only visible inside this module
+
+pub fn square(x f64) f64 {
+    return x * x;
+}</code></pre>
+        </div>
+        <p><code class="inline">module name { ... }</code> groups declarations into an <strong>in-file namespace</strong> — members are reachable as <code class="inline">name.member</code> from the rest of the file. Blocks nest (<code class="inline">module a { module b { ... } }</code> → <code class="inline">a.b.member</code>) and accept dotted names (<code class="inline">module a.b { ... }</code>).</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>physics.tnc</span></div>
+          <pre><code class="lang-tnc">module physics {
+    pub const g f64 = 9.81;
+
+    pub fn energy(m f64, v f64) f64 {
+        return 0.5 * m * v * v;
+    }
+}
+
+fn main() void {
+    // physics.energy / physics.g usable here
+}</code></pre>
+        </div>
+
+        <h3>Import forms</h3>
+        <div class="syntax-box">#import module;                  // namespace import -> module.symbol
+#import module.sub;              // nested path / submodule
+#import module.*;                // wildcard: every pub symbol, usable bare
+#import module.symbol;           // single symbol, usable directly
+#import module.{a, b as c};      // selected symbols, per-symbol aliases
+#import module as alias;         // rename the namespace
+#import "rel/path.tnc" as alias; // file import (module name from file)</div>
+        <p>Whether a bare dotted tail (<code class="inline">math.PI</code>) is a submodule or a single symbol is decided by the module loader: it tries a module file first (<code class="inline">math/PI.tnc</code>, <code class="inline">math/PI/mod.tnc</code>), then a pub symbol of the prefix module (<code class="inline">math</code>). The <code class="inline">{...}</code> and <code class="inline">.*</code> forms are unambiguous. <code class="inline">module.symbol as name</code> renames a single-symbol import; <code class="inline">#import module as m;</code> renames the namespace.</p>
         <h3>Example</h3>
         <div class="code-block">
-          <div class="code-block-head"><span>util.tnc</span></div>
-          <pre><code class="lang-tnc">pub fn add(a i32, b i32) i32 {
-    return a + b;
+          <div class="code-block-head"><span>shapes/vec.tnc — the submodule shapes.vec</span></div>
+          <pre><code class="lang-tnc">pub struct Vec2 {
+    x f32;
+    y f32;
+}
+
+pub fn dot(a Vec2, b Vec2) f32 {
+    return a.x * b.x + a.y * b.y;
 }</code></pre>
         </div>
         <div class="code-block">
           <div class="code-block-head"><span>main.tnc</span></div>
-          <pre><code class="lang-tnc">#import std.io;
-#import util;
-#import std.collections.*;
-
-fn main() void {
-    // std.io symbols accessed via the module name
-    io.println("Hello, Tinoc");
-
-    // std.collections.* symbols available directly
-    var v vec:i32;
-
-    const result = util.add(125, 2022);
-    io.println("{any}", result);
-}</code></pre>
+          <pre><code class="lang-tnc">#import math;
+#import math.PI;                 // single symbol -> PI
+#import math.E as EULER;         // single symbol, renamed
+#import shapes.vec;              // namespace -> vec.Vec2 / vec.dot
+#import shapes.vec.{Vec2, dot};  // selected symbols, usable directly
+#import "shapes/vec.tnc" as vf;  // file import under an alias
+#import shapes.*;                // wildcard -> circumference(...)</code></pre>
         </div>
+
+        <h3>Visibility</h3>
+        <p><code class="inline">pub</code> marks a function, struct, enum, union, const, var, or alias as exported from its module; everything else is private and rejected when imported — <code class="inline">symbol x is private to module math</code> for a private member, <code class="inline">module math has no public symbol x</code> for a missing one. In-file <code class="inline">module name { ... }</code> blocks expose every member (they are the same file's namespace).</p>
+
+        <h3>Modules &amp; generics</h3>
+        <p>Generic declarations (<code class="inline">fn name:T</code>, <code class="inline">struct Name:T</code>, <code class="inline">alias Name:T = ...;</code>, and the multi-param <code class="inline">:(K, V)</code> forms) cross module boundaries like any other pub symbol:</p>
+        <div class="syntax-box">#import math;                  // qualified use: math.identity:i32(42)
+#import math.identity;         // bare use: identity:i32(42) or inferred identity(7)
+#import math.identity as id;   // renamed: id:str("hi")
+#import math.{Pair};           // bare struct template: Pair:f64 { .first = 1.0, ... }
+#import box.Opt;               // bare alias template: Opt:i32
+#import math.*;                // wildcard binds every pub generic bare</div>
+        <p>A bare instantiation and a qualified call of the same generic produce <strong>one</strong> shared mangled C instance (<code class="inline">identity:i32(42)</code> and <code class="inline">math.identity:i32(42)</code> emit a single <code class="inline">tnc_math_identity_i32</code>), so an imported generic is never duplicated. Each concrete instantiation is monomorphized once per type-argument set, and generic bodies are checked in the <strong>defining module's scope</strong> — module-private helpers and consts resolve exactly as the template author wrote them.</p>
+
+        <h3>Module resolution rules</h3>
         <ul class="note-list">
-          <li><code class="inline">#import</code> replaces C's <code class="inline">#include</code>. It resolves modules semantically instead of inserting file text.</li>
-          <li><code class="inline">.*</code> imports all public exports from a module into the current scope.</li>
-          <li><code class="inline">pub</code> marks a function, struct, enum, union, const, etc. as public for import.</li>
-          <li>Without <code class="inline">.*</code>, symbols are accessed via the last path segment (e.g. <code class="inline">std.io</code> → <code class="inline">io.println</code>).</li>
+          <li>Imports resolve <strong>relative to the importing file's directory</strong>: <code class="inline">#import a.b.c;</code> looks for <code class="inline">a/b/c.tnc</code>, then <code class="inline">a/b/c/mod.tnc</code>, then <code class="inline">a/b/c/c.tnc</code>.</li>
+          <li>Modules load <strong>recursively</strong> (imports of imports) with <strong>cycle detection</strong> (<code class="inline">import cycle detected: a -> b -> a</code>) and are <strong>cached by absolute path</strong> — diamond imports share one instance.</li>
+          <li>Re-importing the same module under the same local name is idempotent; binding a <em>different</em> module under a taken name is an error.</li>
+          <li>Two files claiming the same module name collide (<code class="inline">module math is already defined by ...</code>), since their items would mangle to the same C symbols.</li>
+          <li>The <strong>standard library is not available yet</strong>: <code class="inline">#import std.io;</code> is rejected with <code class="inline">standard library modules are not yet available (std.io)</code> — user modules only for now.</li>
+          <li>Every module's code is merged into one C translation unit; module items get mangled C names (<code class="inline">math.abs</code> → <code class="inline">tnc_math_abs</code>) so same-named items across modules never collide.</li>
         </ul>
       </article>
 
@@ -882,15 +1132,44 @@ fn main() void {
           <table class="docs-table">
             <thead><tr><th>Directive</th><th>Purpose</th></tr></thead>
             <tbody>
-              <tr><td><code>#import</code></td><td>Compile-time module resolution. Pass the main file (e.g. <code class="inline">main.tnc</code>) and the compiler handles the rest.</td></tr>
+              <tr><td><code>#import</code></td><td>Compile-time module resolution. Pass the main file (e.g. <code class="inline">main.tnc</code>) and the compiler loads, checks, and merges every transitively imported module.</td></tr>
+              <tr><td><code>#importc</code></td><td>C header import. <code class="inline">#importc "stdio.h" "math.h" as c;</code> parses real C headers (clang's JSON AST, gcc's <code class="inline">-aux-info</code> fallback) and exposes their functions, extern variables, enum constants, typedefs, and simple macros under the alias with full type checking. See <a href="#c-interop">C interop</a>.</td></tr>
+              <tr><td><code>extern "C" fn</code></td><td>Hand-declared C function declarations (no header parsing). See <a href="#c-interop">C interop</a>.</td></tr>
               <tr><td><code>#run</code></td><td>Compile-time execution as an expression or block. Useful for metaprogramming.</td></tr>
               <tr><td><code>#partial</code></td><td>Tells the compiler about a partial implementation of a <code class="inline">switch</code> on an enum.</td></tr>
             </tbody>
           </table>
         </div>
         <div class="callout">
-          More directives may be added in future versions.
+          Other useful preprocessor directives may be added in future versions.
         </div>
+      </article>
+
+      <article id="c-interop">
+        <h2>C interop</h2>
+        <p>Tinoc talks to C two ways: <code class="inline">#importc</code> parses real headers, <code class="inline">extern "C" fn</code> declares functions by hand. Both give you type-checked calls into libc and any other C library.</p>
+
+        <h3><code class="inline">#importc</code> — import C headers</h3>
+        <div class="syntax-box">#importc "stdio.h";                 // alias defaults to the file stem: stdio
+#importc "stdio.h" "math.h" as c;  // multiple headers, explicit alias
+#importc "mylib.h" as mylib;        // local header next to the source</div>
+        <p>The compiler parses each header and registers every function, extern variable, enum constant, typedef, and object-like macro under the alias:</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>cio.tnc</span></div>
+          <pre><code class="lang-tnc">#importc "stdio.h" as cio;
+
+fn main() void {
+    cio.printf("%.1f\n", 3.14);   // full argument type/count checking
+    var code i32 = cio.EOF;        // -1 (macro constant)
+}</code></pre>
+        </div>
+        <p>Codegen emits one <code class="inline">#include</code> per header into the merged output, so the declarations resolve at C compile time. Type safety is enforced at the Tinoc level first — unknown members (<code class="inline">undefined: cio.doesNotExist</code>) and wrong argument counts/types are caught before C ever runs.</p>
+
+        <h3><code class="inline">extern "C" fn</code> — hand-declared C functions</h3>
+        <div class="syntax-box">extern "C" fn printf(fmt *const char, ...) i32;
+extern "C" fn strlen(s *const char) usize;
+extern "C" fn my_puts.puts(s *const char) i32;   // call my_puts, C symbol puts</div>
+        <p>Declarations must end with <code class="inline">;</code> (no body); variadic declarations need at least one named parameter before <code class="inline">...</code>. <code class="inline">str</code> arguments are unwrapped to their underlying <code class="inline">char*</code> automatically, so <code class="inline">printf("%s\n", lang)</code> passes the string's data pointer.</p>
       </article>
 
     </div>
@@ -913,7 +1192,7 @@ fn main() void {
           </svg>
           <span class="brand-word">Tinoc</span>
         </a>
-        <p>A modern systems programming language that transpiles to C99. Meaningful, Accurate, Robust, Maximum Performance, Simple.</p>
+        <p>A modern systems programming language that transpiles to C11. Meaningful, Accurate, Robust, Maximum Performance, Simple.</p>
       </div>
       <div class="footer-col">
         <h4>Language</h4>
@@ -928,6 +1207,7 @@ fn main() void {
         <h4>Project</h4>
         <ul>
           <li><a href="install.html">Install</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
           <li><a href="https://github.com/tinoc-lang/tinoc" target="_blank" rel="noopener">Source code</a></li>
           <li><a href="https://github.com/tinoc-lang/tinoc/issues" target="_blank" rel="noopener">Issues</a></li>
           <li><a href="https://github.com/pbarot2009" target="_blank" rel="noopener">Creator</a></li>
@@ -944,7 +1224,7 @@ fn main() void {
     </div>
     <div class="footer-bottom">
       <span>© <span data-year>2026</span> The Tinoc contributors · Apache-2.0</span>
-      <span>Tinoc — This Is Not C. Made with <span class="heart">♥</span> and C99.</span>
+      <span>Tinoc — This Is Not C. Made with <span class="heart">♥</span> and C11.</span>
     </div>
   </div>
 </footer>
