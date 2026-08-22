@@ -29,6 +29,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&family=Google+Sans+Code:wght@400..700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/style.css">
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 
 <script type="application/ld+json">
 {
@@ -109,6 +110,10 @@
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.1 11.1 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.67.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
         Star on GitHub
       </a>
+    </div>
+
+    <div class="pipeline" aria-hidden="true">
+      <span>main.tnc</span><span class="pipe-arrow">→</span><span>C11</span><span class="pipe-arrow">→</span><span>Any C compiler</span>
     </div>
 
     <div class="code-window" id="demo-window">
@@ -424,18 +429,23 @@ fn main() void {
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
   <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a class="nav-brand" href="index.html" aria-label="Tinoc home">
-          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
-            <rect width="40" height="40" rx="11" fill="#0d2b26"/>
-            <rect width="38" height="38" x="1" y="1" rx="10" fill="none" stroke="rgba(94,234,212,0.3)"/>
-            <path d="M12 9h16v4.6h-5.7v17.4h-4.6V13.6H12z" fill="#5eead4"/>
-          </svg>
-          <span class="brand-word">Tinoc</span>
-        </a>
-        <p>A modern systems programming language that transpiles to C11. Meaningful, Accurate, Robust, Maximum Performance, Simple.</p>
+    <div class="footer-brand">
+      <a class="nav-brand" href="index.html" aria-label="Tinoc home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="11" fill="#0d2b26"/>
+          <rect width="38" height="38" x="1" y="1" rx="10" fill="none" stroke="rgba(94,234,212,0.3)"/>
+          <path d="M12 9h16v4.6h-5.7v17.4h-4.6V13.6H12z" fill="#5eead4"/>
+        </svg>
+        <span class="brand-word">Tinoc</span>
+      </a>
+      <p>A modern systems programming language that transpiles to C11. Meaningful, Accurate, Robust, Maximum Performance, Simple.</p>
+      <div class="footer-spec" aria-label="Project facts">
+        <span>v0.1.0</span>
+        <span>Apache-2.0</span>
+        <span>This Is Not C</span>
       </div>
+    </div>
+    <div class="footer-cols">
       <div class="footer-col">
         <h4>Language</h4>
         <ul>
