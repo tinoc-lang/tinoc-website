@@ -156,7 +156,7 @@
         <h2>Getting started</h2>
         <p class="lead">Tinoc is a systems programming language that <strong>transpiles to C11</strong>. Write <code class="inline">.tnc</code> source, emit portable C, and build it with any C11 toolchain.</p>
         <p>Tinoc respects C and its usage. It is built on the philosophy that programming should be <strong>Meaningful</strong>, <strong>Accurate</strong>, <strong>Robust</strong>, <strong>Maximum Performance</strong>, and <strong>Simple</strong> — C11 unlocks features like <code class="inline">_Generic</code> dispatch in the <code class="inline">tinoc.h</code> runtime (saturating arithmetic) and gives the compiler room to grow (error unions, typed enums, generics) without fighting the target language.</p>
-        <p>v0.1.0 is out. Install the latest release binary into <code class="inline">~/.tinoc</code> — no root needed — with the one-line installers on the <a href="install.html">install page</a>.</p>
+        <p>v0.1.1 is out. Install the latest release binary into <code class="inline">~/.tinoc</code> — no root needed — with the one-line installers on the <a href="install.html">install page</a>.</p>
 
         <h3>Hello, world</h3>
         <div class="code-block">
@@ -670,6 +670,19 @@ fn main() void {
     io.println("{any}", p);
 }</code></pre>
         </div>
+
+        <h3>Struct literals</h3>
+        <p>Struct values are constructed with <strong>named-field literals</strong>. Fields may appear in any order and a trailing comma is allowed; every field must be initialized exactly once:</p>
+        <div class="syntax-box">var p Point = Point { .x = 1.0, .y = 2.0 };
+var q Point = Point { .y = 0.5, .x = -1.0, };   // any order, trailing comma
+var pair Pair:i32 = Pair:i32 { .first = 10, .second = 20 };  // generic instance</div>
+        <ul class="note-list">
+          <li>An <strong>empty literal</strong> — <code class="inline">Point {}</code> — is an explicit zero-initialization: every field takes its zero value, so no field list is required.</li>
+          <li><strong>Unknown fields</strong>, <strong>missing fields</strong>, and <strong>wrong-typed fields</strong> are reported with exact source spans; an unknown name gets a <code class="inline">did you mean ...?</code> hint when a close match exists.</li>
+          <li>Array-typed fields initialize with plain C brace syntax (<code class="inline">Vec { .data = [3]f64 { 1.0, 2.0, 3.0 } }</code>), and slice fields accept a typed literal (<code class="inline">Bag { .items = []i32 {} }</code>).</li>
+          <li>A <code class="inline">const</code> binding is immutable all the way down: assigning to one of its fields — directly, through nested structs (<code class="inline">o.inner.v = 1</code>), or through array members — is rejected with <code class="inline">cannot assign to ... (declared const)</code>. Writes that go <em>through a handle</em> stay legal: mutating methods write <code class="inline">self^.x</code>, and slice parameters write <code class="inline">s[i]</code>.</li>
+          <li>Circular by-value layouts are detected at the end of analysis and reported as <code class="inline">circular struct layout: A -&gt; B -&gt; A</code> with a pointer suggestion (<code class="inline">make one of the fields a pointer, e.g. ^A</code>). Mutually-recursive generic structs hit an instantiation depth limit with a clear error instead of hanging the compiler.</li>
+        </ul>
       </article>
 
       <article id="enums">
@@ -784,7 +797,10 @@ fn main() void {
 [_]&lt;T&gt;                 // size inferred from the initializer, e.g. [_]f32
 [&lt;length&gt;:&lt;sentinel&gt;]&lt;T&gt;  // sentinel-terminated array, e.g. [_:0]u8
 
-[&lt;elem&gt;, &lt;elem&gt;, …]    // array literal; element type is inferred</div>
+[&lt;elem&gt;, &lt;elem&gt;, …]    // array literal; element type is inferred
+
+[&lt;T&gt;] { &lt;elem&gt;, … }       // typed slice literal, e.g. []i32 { 1, 2 } or []i32 {}
+[&lt;N&gt;&lt;T&gt;] { &lt;elem&gt;, … }    // typed fixed-size literal, e.g. [3]i32 { 1, 2, 3 }</div>
         <h3>Example</h3>
         <div class="code-block">
           <div class="code-block-head"><span>arrays.tnc</span></div>
@@ -829,6 +845,23 @@ fn total(s []i32) i32 { ... }  // functions take slices, not arrays</code></pre>
           <li>Assigning a whole array is rejected for the same reason; copy element-wise instead. Iterate with the collection form: <code class="inline">for s |v| { ... }</code>.</li>
           <li>Slice types are emitted as named typedefs (<code class="inline">tnc_slice_i32</code>) so prototypes and definitions share one C type.</li>
         </ul>
+
+        <h3>Typed literals</h3>
+        <p>A type-annotated literal — <code class="inline">[]i32 {}</code>, <code class="inline">[]f64 { 1.5, 2.5 }</code>, or <code class="inline">[3]i32 { 1, 2, 3 }</code> — spells the element type explicitly and is useful wherever the result location isn't a plain declaration (struct literal fields, return statements). The annotation is syntax sugar: Sema retypes the literal from the result location as usual.</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>typed_literals.tnc</span></div>
+          <pre><code class="lang-tnc">struct Bag {
+    items []i32;
+}
+
+fn make() []i32 {
+    return []i32 { 10, 20, 30 };
+}
+
+fn main() void {
+    var b Bag = Bag { .items = []i32 {} }; // empty slice: { .ptr = NULL, .len = 0 }
+}</code></pre>
+        </div>
 
         <h3>Multidimensional arrays</h3>
         <p>Nested <code class="inline">[N]T</code> types build row-major matrices: <code class="inline">[4][5]f32</code> is 4 rows of 5 <code class="inline">f32</code>. A row (<code class="inline">mat[i]</code>) is itself an array, so iterate row-by-row:</p>
@@ -1194,7 +1227,7 @@ extern "C" fn my_puts.puts(s *const char) i32;   // call my_puts, C symbol puts<
       </a>
       <p>A modern systems programming language that transpiles to C11. Meaningful, Accurate, Robust, Maximum Performance, Simple.</p>
       <div class="footer-spec" aria-label="Project facts">
-        <span>v0.1.0</span>
+        <span>v0.1.1</span>
         <span>Apache-2.0</span>
         <span>This Is Not C</span>
       </div>

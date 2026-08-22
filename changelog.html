@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tinoc — Changelog</title>
-<meta name="description" content="All notable changes to Tinoc, documented per Keep a Changelog and SemVer: the module system, generics, optionals, arrays, slices, enums, unions, installers, and the v0.1.0 release.">
+<meta name="description" content="All notable changes to Tinoc, documented per Keep a Changelog and SemVer: the module system, generics, optionals, arrays, slices, enums, unions, installers, and the v0.1.1 release.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="The Tinoc contributors">
 <meta name="theme-color" content="#0a0e0d">
@@ -13,13 +13,13 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tinoc — This Is Not C">
 <meta property="og:title" content="Tinoc — Changelog">
-<meta property="og:description" content="All notable changes to Tinoc, documented per Keep a Changelog and SemVer: the module system, generics, optionals, arrays, slices, enums, unions, installers, and the v0.1.0 release.">
+<meta property="og:description" content="All notable changes to Tinoc, documented per Keep a Changelog and SemVer: the module system, generics, optionals, arrays, slices, enums, unions, installers, and the v0.1.1 release.">
 <meta property="og:url" content="https://tinoc-lang.vercel.app/changelog.html">
 <meta property="og:image" content="https://tinoc-lang.vercel.app/logo-mint.jpg">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tinoc — Changelog">
-<meta name="twitter:description" content="All notable changes to Tinoc, documented per Keep a Changelog and SemVer: the module system, generics, optionals, arrays, slices, enums, unions, installers, and the v0.1.0 release.">
+<meta name="twitter:description" content="All notable changes to Tinoc, documented per Keep a Changelog and SemVer: the module system, generics, optionals, arrays, slices, enums, unions, installers, and the v0.1.1 release.">
 <meta name="twitter:image" content="https://tinoc-lang.vercel.app/logo-mint.jpg">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d2b26'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' font-weight='700' text-anchor='middle' fill='%235eead4'%3ET%3C/text%3E%3C/svg%3E">
@@ -36,7 +36,7 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Tinoc — Changelog",
-  "description": "All notable changes to Tinoc, documented per Keep a Changelog and SemVer: the module system, generics, optionals, arrays, slices, enums, unions, installers, and the v0.1.0 release.",
+  "description": "All notable changes to Tinoc, documented per Keep a Changelog and SemVer: the module system, generics, optionals, arrays, slices, enums, unions, installers, and the v0.1.1 release.",
   "url": "https://tinoc-lang.vercel.app/changelog.html",
   "inLanguage": "en",
   "isPartOf": {
@@ -90,7 +90,7 @@
     <div class="container">
       <div class="clog-nav reveal">
         <a class="btn btn-ghost btn-sm" href="https://github.com/tinoc-lang/tinoc/releases" target="_blank" rel="noopener">GitHub releases</a>
-        <a class="btn btn-ghost btn-sm" href="https://github.com/tinoc-lang/tinoc/compare/v0.1.0...HEAD" target="_blank" rel="noopener">Compare v0.1.0…HEAD</a>
+        <a class="btn btn-ghost btn-sm" href="https://github.com/tinoc-lang/tinoc/compare/v0.1.1...HEAD" target="_blank" rel="noopener">Compare v0.1.1…HEAD</a>
         <a class="btn btn-primary btn-sm" href="install.html">Install the latest</a>
       </div>
 
@@ -101,12 +101,30 @@
             <h2 class="clog-version">Unreleased</h2>
             <span class="pill next">In development</span>
           </div>
-          <a class="clog-diff" href="https://github.com/tinoc-lang/tinoc/compare/v0.1.0...HEAD" target="_blank" rel="noopener">Diff vs v0.1.0 →</a>
+          <a class="clog-diff" href="https://github.com/tinoc-lang/tinoc/compare/v0.1.1...HEAD" target="_blank" rel="noopener">Diff vs v0.1.1 →</a>
         </header>
+        <p class="clog-intro">No unreleased changes yet — next release's entries land here.</p>
+      </article>
+
+      <!-- ============ 0.1.1 ============ -->
+      <article class="clog-release reveal" id="v0-1-1">
+        <header class="clog-head">
+          <div class="clog-title">
+            <h2 class="clog-version">0.1.1</h2>
+            <span class="clog-date">2026-08-17</span>
+            <span class="pill done">Released</span>
+          </div>
+          <a class="clog-diff" href="https://github.com/tinoc-lang/tinoc/releases/tag/v0.1.1" target="_blank" rel="noopener">Release v0.1.1 →</a>
+        </header>
+        <p class="clog-intro">Patch release. Structs are now complete end-to-end — generics, methods, literals, const-mutability, and layout diagnostics — generic structs with methods work across module boundaries, and the project gained a hermetic Nix flake with matching CI.</p>
 
         <div class="clog-cat added">
           <h3>Added</h3>
           <ul class="clog-list">
+            <li><strong>Structs, end-to-end</strong>: generic structs (<code class="inline">Box:T</code>, <code class="inline">Pair:(K, V)</code>) with monomorphized C11 <code class="inline">typedef</code> emission, instance (<code class="inline">self ^T</code> / <code class="inline">self T</code>) and static methods, named-field and zero-init literals, and const-mutability enforced all the way down (<code class="inline">o.inner.v = 1</code> on a <code class="inline">const</code> struct is rejected). Layout diagnostics: circular by-value containment (<code class="inline">circular struct layout: A -&gt; B -&gt; A</code>, with a pointer suggestion) and a generic-instantiation depth limit that turns mutually-recursive generic structs into a clear error instead of hanging the compiler.</li>
+            <li><strong>Typed array/slice literals</strong>: <code class="inline">[]i32 { ... }</code>, <code class="inline">[]f64 { 1.5, 2.5 }</code>, and <code class="inline">[3]i32 { 1, 2, 3 }</code> spell the element type explicitly — useful in struct literal fields and return statements. An empty literal binds to a concrete <code class="inline">[0]T</code> type and codegen emits an empty slice (<code class="inline">{ .ptr = NULL, .len = 0 }</code>), so <code class="inline">Bag { .items = []i32 {} }</code> works.</li>
+            <li><strong>Nix flake + CI</strong>: a hermetic dev shell (<code class="inline">nix develop</code>) with the pinned Go toolchain, lint, and C11 toolchain, plus <code class="inline">nix build .#tinoc</code> and <code class="inline">nix flake check</code> — gofmt, go vet, <code class="inline">go test -race</code>, and the end-to-end samples suite — running in CI on Linux and macOS.</li>
+            <li><strong>Samples 24–28</strong> exercise every new feature end-to-end: generic structs with methods, named-field and zero-init literals, by-value receivers and copy semantics, self-referencing linked lists with methods, and generic structs instantiated across module boundaries.</li>
             <li><strong>Smart module system</strong>: <code class="inline">#import</code> now resolves user modules semantically. Every form is supported — namespace (<code class="inline">#import math;</code>), wildcard (<code class="inline">#import math.*;</code>), single symbol (<code class="inline">#import math.PI;</code>), selected symbols with per-symbol aliases (<code class="inline">#import math.{a, b as c};</code>), namespace aliases (<code class="inline">#import math as m;</code>), submodule paths (<code class="inline">#import shapes.vec;</code>), and quoted file imports (<code class="inline">#import "lib/tools.tnc" as t;</code>). Paths resolve relative to the importing file; <code class="inline">a.b.c</code> finds <code class="inline">a/b/c.tnc</code>, then the directory forms <code class="inline">a/b/c/mod.tnc</code> / <code class="inline">a/b/c/c.tnc</code> — <strong>directories become modules automatically</strong> (<code class="inline">shapes/mod.tnc</code> is the module <code class="inline">shapes</code>). Imports load recursively with cycle detection and cache by absolute path, so diamond imports share one module instance; re-importing the same module is idempotent. Module-name collisions and <code class="inline">std.*</code> imports (not available yet) get clear diagnostics.</li>
             <li><strong><code class="inline">module</code> keyword</strong>: <code class="inline">module name;</code> names a file's module (files without one take their file stem); <code class="inline">module name { ... }</code> groups declarations into an in-file namespace, with nesting (<code class="inline">module a { module b { ... } }</code> → <code class="inline">a.b.member</code>) and dotted names (<code class="inline">module a.b { ... }</code>). <code class="inline">pub</code> marks exports; private items are rejected when imported (<code class="inline">symbol x is private to module math</code>).</li>
             <li><strong>Generics end-to-end</strong>: <code class="inline">fn name:T(...)</code>, <code class="inline">struct Name:T { ... }</code>, and <code class="inline">alias Name:T = ...;</code> (including multi-param <code class="inline">:(K, V)</code> forms) are monomorphized — each concrete type-argument set produces one copy with a mangled C name (<code class="inline">Pair:i32</code> → <code class="inline">tnc_Pair_i32</code>), cached per instance. Calls support explicit type arguments (<code class="inline">identity:str(x)</code>) and inference from argument types (<code class="inline">identity(x)</code>), and generics work across module boundaries (<code class="inline">shapes.Circle:f64</code>, <code class="inline">math.identity:i32(42)</code>).</li>
@@ -135,6 +153,7 @@
         <div class="clog-cat fixed">
           <h3>Fixed</h3>
           <ul class="clog-list">
+            <li><strong>Cross-module generic structs with methods</strong>: instantiating a module's generic struct that declared methods (<code class="inline">struct Box:T { fn get(self ^Box:T) ... }</code> imported as <code class="inline">containers.Box:i32</code>) failed semantic analysis — the method signature/body substitution rewrote the type arguments but kept the template's bare base. <code class="inline">substituteTypeExpr</code> now substitutes a generic's base too, so cross-module instances resolve to the concrete canonical type and their methods check and codegen correctly.</li>
             <li><strong><code class="inline">#importc</code> local headers next to modules in subdirectories</strong>: a module file importing its own local header (<code class="inline">#importc "vecmath.h"</code> inside <code class="inline">lib/mathc.tnc</code> with <code class="inline">vecmath.h</code> beside it) emitted the right quoted include into the merged C, but the C compile step only put the <em>entry file's</em> directory on the include path — so the header was not found and the build failed. <code class="inline">compileGeneratedC</code> now receives every loaded module's directory as an <code class="inline">-I</code> path (in load order, deduplicated), so local headers resolve wherever they live.</li>
             <li><strong>Generic struct instantiation recursion</strong>: a generic method whose signature references the struct's own type (<code class="inline">fn sum(self ^Pair:T)</code>) re-entered instantiation while the instance was still being built and recursed forever (clone → register method → resolve signature → re-instantiate). Instances are now cached before their method signatures resolve, so the re-entrant call hits the cache.</li>
             <li><strong>Generic bodies kept stale type parameters</strong>: after monomorphization a generic body's type expressions still carried the template's type parameters (<code class="inline">return Pair:(K, V) { ... }</code> inside a <code class="inline">makePair:(K, V)</code> instance), so re-checking the body failed on K/V. <code class="inline">substituteBodyTypes</code> now rewrites every reachable type expression in the cloned body from the same substitution environment as the signature.</li>
@@ -245,7 +264,7 @@
       </a>
       <p>A modern systems programming language that transpiles to C11. Meaningful, Accurate, Robust, Maximum Performance, Simple.</p>
       <div class="footer-spec" aria-label="Project facts">
-        <span>v0.1.0</span>
+        <span>v0.1.1</span>
         <span>Apache-2.0</span>
         <span>This Is Not C</span>
       </div>
