@@ -18,8 +18,13 @@
     const lang = classes.find((c) => c.startsWith("lang-"));
     const name = lang ? lang.replace("lang-", "") : "tnc";
 
-    if (name === "tnc" || name === "c") {
-      code.innerHTML = hl.highlight(code.textContent, name);
+    const set = ["tnc", "c"].includes(name)
+      ? name
+      : ["text", "sh", "bash", "shell", "console"].includes(name)
+        ? "shell"
+        : null;
+    if (set) {
+      code.innerHTML = hl.highlight(code.textContent, set);
     }
 
     const head = block.querySelector(".code-block-head");
